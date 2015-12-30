@@ -1,0 +1,44 @@
+
+   [
+     {
+       "categoryName": "Maths",
+       "subCategory": [
+         {"subCategory":"Arithmetic", "categoryId" :1 },
+         {"subCategory":"Algebra", "categoryId" :2 },
+         {"subCategory":"Geometry", "categoryId" :3 }
+       ]
+     },
+    {
+      "categoryName": "Social Studies",
+      "subCategory": [
+        {"subCategory":"History", "categoryId" :4 },
+        {"subCategory":"Civics", "categoryId" :5 },
+        {"subCategory":"Geography", "categoryId" :6 }
+
+      ]
+    },
+    {
+      "categoryName": "English",
+      "subCategory": [
+        {"subCategory":"Reading", "categoryId" :7 },
+        {"subCategory":"Poetry", "categoryId" :8 },
+        {"subCategory":"Grammar", "categoryId" :9 }
+      ]
+    },
+    {
+      "categoryName": "Science",
+      "subCategory": [
+        {"subCategory":"Physics", "categoryId" :10 },
+        {"subCategory":"Chemistry", "categoryId" :11 },
+        {"subCategory":"Biology", "categoryId" :12 }
+      ]
+    },
+    {
+      "categoryName": "Art",
+      "subCategory": [
+        {"subCategory":"Music", "categoryId" :13 },
+        {"subCategory":"Drawing", "categoryId" :14 }
+      ]
+    }
+
+]
