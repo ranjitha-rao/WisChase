@@ -36,7 +36,37 @@ public class Question   {
      */
     private int correctAnswer;
 
-    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour, int correctAnswer) {
+    private int grade;
+
+    private int categryId;
+
+    private int userid;
+
+     /**
+     *
+     * @param questionId
+
+     * @param questionText
+     * @param optionOne
+     * @param optionTwo
+     * @param optionThree
+     * @param optionFour
+     * @param correctAnswer
+     */
+
+    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour, int correctAnswer, int grade, int userid, int categoryId ) {
+        this.questionId = questionId;
+        this.questionText = questionText;
+        this.optionOne = optionOne;
+        this.optionTwo = optionTwo;
+        this.optionThree = optionThree;
+        this.optionFour = optionFour;
+        this.correctAnswer = correctAnswer;
+        this.grade = grade;
+        this.categryId = categoryId;
+        this.userid = userid;
+    }
+    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour, int correctAnswer ) {
         this.questionId = questionId;
         this.questionText = questionText;
         this.optionOne = optionOne;
@@ -53,11 +83,25 @@ public class Question   {
     public void setGrade(int grade) {
         this.grade = grade;
     }
+    public int getCategryId() {
+        return categryId;
+    }
+
+    public void setCategryId(int categryId) {
+        this.categryId = categryId;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
 
     /**
      * The grade for which this question is applicable
      */
-    private int grade;
 
     public int getQuestionId() {
         return questionId;
