@@ -34,9 +34,9 @@ public class DBHandlerTest extends AndroidTestCase
         long numRowsCategory = DatabaseUtils.queryNumEntries(dbRead, CreateTables.TABLE_CATEGORY);
         assertTrue(numRowsCategory > 0);
         long numRowsUser = DatabaseUtils.queryNumEntries(dbRead, CreateTables.TABLE_USER);
-        assertTrue(numRowsUser == 0);
+        assertTrue(numRowsUser == 1);
         long numRowsQuestion = DatabaseUtils.queryNumEntries(dbRead, CreateTables.TABLE_QUESTION);
-        assertTrue(numRowsQuestion == 0);
+        assertTrue(numRowsQuestion > 1);
         dbRead.close();
     }
 
@@ -60,4 +60,5 @@ public class DBHandlerTest extends AndroidTestCase
         dbRead.delete(CreateTables.TABLE_CATEGORY, CreateTables.KEY_ID + " = " + categoryId, null);
         dbRead.close();
     }
+
 }
