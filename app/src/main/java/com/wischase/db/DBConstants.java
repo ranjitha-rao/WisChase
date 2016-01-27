@@ -12,4 +12,9 @@ public class DBConstants {
      * JSON file with all categories in JSON representation
      */
     public final static String JSON_FILE_NAME = "Category.json";
+    /**
+     * JSON file with questions
+     */
+    public final static String JSON_QUESTIONFILE_NAME = "Questions2Grade.json";
+
 }

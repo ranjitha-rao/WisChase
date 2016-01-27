@@ -52,14 +52,19 @@ public class DBHandler extends SQLiteOpenHelper{
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String SYSTEMUSER = "systemUser";
         // Create the category table
         db.execSQL(CreateTables.CREATE_CATEGORY_TB);
         // Initial DB setup
         insertCategoryFromJson(db);
         // Create user table
         db.execSQL(CreateTables.CREATE_USER_TB);
+        // Insert system user
+        addUserInfo(SYSTEMUSER, db);
         // Create question table
         db.execSQL(CreateTables.CREATE_QUESTION_TB);
+        // Insert sample questions
+        insertSampleQuestions(db);
     }
 /* Categories DB operation - start */
 
@@ -71,7 +76,7 @@ public class DBHandler extends SQLiteOpenHelper{
         try {
             // Reads the category list from Json file
             Type listType = new TypeToken<List<Category>>() {}.getType();
-            List<Category> categoryArray = (List<Category>) JsonUtil.categoryFromJson(context, DBConstants.JSON_FILE_NAME,listType);
+            List<Category> categoryArray = (List<Category>) JsonUtil.categoryFromJson(context, DBConstants.JSON_FILE_NAME, listType);
             // After the list is read now it is time insert into DB
             for (Category categoryObject:categoryArray)              {
                 List<Category.SubCategory> subCategoryList = categoryObject.getSubCategory();
@@ -106,7 +111,7 @@ public class DBHandler extends SQLiteOpenHelper{
     }
 
     public long insertUserAddedCatInfo(String category, String subCategory) {
-       long insertSuccess = insertCategoryInfo(category,subCategory,this.getWritableDatabase());
+       long insertSuccess = insertCategoryInfo(category, subCategory, this.getWritableDatabase());
         return insertSuccess;
     }
     private long insertCategoryInfo(String category, String subCategory, SQLiteDatabase db)        {
@@ -125,48 +130,72 @@ public class DBHandler extends SQLiteOpenHelper{
      */
     public long insertUserInfo(String userName)  {
         SQLiteDatabase userDB = this.getWritableDatabase();
+        long userId = addUserInfo(userName, userDB);
+        userDB.close();
+        return userId;
+    }
+
+    private long addUserInfo(String userName, SQLiteDatabase userDB) {
         // User name as eneterd by the user
         ContentValues userInfo = new ContentValues(1);
         userInfo.put(CreateTables.KEY_USERNAME,userName);
         // Get the rowid. This will be the user id.
         long userId = userDB.insert(CreateTables.TABLE_USER, null, userInfo);
-        userDB.close();
         return userId;
     }
-/* User DB operation - start */
+
+    /* User DB operation - start */
     /* Question table DB operation -start */
+public void insertSampleQuestions(SQLiteDatabase db)  {
+    try {
+        // Reads the category list from Json file
+        Type listType = new TypeToken<List<Question>>() {}.getType();
+        List<Question> questionArray = (List<Question>) JsonUtil.categoryFromJson(context, DBConstants.JSON_QUESTIONFILE_NAME, listType);
+        // After the list is read now it is time insert into DB
+        for (Question question:questionArray)              {
+            // This is required because each subcategory needs its own id
+                // Create key value pair to insert into DB
+               long questionId = insertQuestionInfo(question, db);
+        }
+    }
+    catch (Exception io) {
+        Log.d("Data setup error : ", io.getMessage());
+    }
+}
+
+    private long insertQuestionInfo(Question question, SQLiteDatabase db) {
+        ContentValues questionInfo = questionToContentValues(question);
+        long questionId = db.insert(CreateTables.TABLE_QUESTION, null, questionInfo);
+        return questionId;
+    }
 
     /**
      * Insert user added question
-      * @param questionText The question
-     * @param optionOne  option one for the question
-     * @param optionTwo option two for the question
-     * @param optionThree option three for the question
-     * @param optionFour option four for the question
-     * @param correctAnswer correct answer option
-     * @param userId User who added the question
-     * @param categoryId category under which the question is added
+     * @param questionObject The user added question represented by a question object
      * @return the question id
      */
-    public long insertQuestion(String questionText, String optionOne, String optionTwo, String optionThree, String optionFour, String correctAnswer, int userId, int categoryId,int grade) {
+    public long insertQuestion(Question questionObject) {
         SQLiteDatabase questionDb = this.getWritableDatabase();
-        ContentValues questionInfo = new ContentValues();
-        // Add all the params to the map.
-        questionInfo.put(CreateTables.KEY_QUESTION, questionText);
-        questionInfo.put(CreateTables.KEY_OPTIONONE, optionOne);
-        questionInfo.put(CreateTables.KEY_OPTIONTWO, optionTwo);
-        questionInfo.put(CreateTables.KEY_OPTIONTHREE, optionThree);
-        questionInfo.put(CreateTables.KEY_OPTIONFOUR, optionFour);
-        questionInfo.put(CreateTables.KEY_CORRECTANSWER, correctAnswer);
-        questionInfo.put(CreateTables.KEY_USER_ID, userId);
-        questionInfo.put(CreateTables.KEY_ID, categoryId);
-        questionInfo.put(CreateTables.KEY_GRADE, grade);
         // Insert the question and return the question id/ rowid
+        ContentValues questionInfo = questionToContentValues(questionObject);
         long questionId = questionDb.insert(CreateTables.TABLE_QUESTION, null, questionInfo);
         questionDb.close();
         return questionId;
     }
-
+    private ContentValues questionToContentValues(Question questionObject) {
+        ContentValues questionInfo = new ContentValues();
+        // Add all the params to the map.
+        questionInfo.put(CreateTables.KEY_QUESTION, questionObject.getQuestionText());
+        questionInfo.put(CreateTables.KEY_OPTIONONE, questionObject.getOptionOne());
+        questionInfo.put(CreateTables.KEY_OPTIONTWO, questionObject.getOptionTwo());
+        questionInfo.put(CreateTables.KEY_OPTIONTHREE, questionObject.getOptionThree());
+        questionInfo.put(CreateTables.KEY_OPTIONFOUR, questionObject.getOptionFour());
+        questionInfo.put(CreateTables.KEY_CORRECTANSWER, questionObject.getCorrectAnswer());
+        questionInfo.put(CreateTables.KEY_USER_ID, questionObject.getUserid());
+        questionInfo.put(CreateTables.KEY_ID, questionObject.getCategryId());
+        questionInfo.put(CreateTables.KEY_GRADE, questionObject.getGrade());
+        return questionInfo;
+    }
     public List<Question> getAllQuestions ( int categoryId, int grade)  {
         SQLiteDatabase qDb = this.getReadableDatabase();
         String[] columnQuestion = {CreateTables.KEY_QUESTIONID,CreateTables.KEY_QUESTION,CreateTables.KEY_OPTIONONE,CreateTables.KEY_OPTIONTWO, CreateTables.KEY_OPTIONTHREE, CreateTables.KEY_OPTIONFOUR};
