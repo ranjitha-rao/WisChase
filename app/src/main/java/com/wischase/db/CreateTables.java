@@ -58,10 +58,13 @@ public class CreateTables {
     public static final String KEY_OPTIONTHREE = "optionthree";
     public static final String KEY_OPTIONFOUR = "optionfour" ;
     public static final String KEY_CORRECTANSWER = "correctanswer";
+    public static final String KEY_EXPLANATION = "explanation";
+
     /**
      * Create statement for Question table. Intial data setup
      */
-    public final static String CREATE_QUESTION_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTION + " (" + KEY_USER_ID + " INTEGER , " + KEY_ID + " INTEGER , " + KEY_GRADE + " INTEGER , "+KEY_QUESTIONID+" INTEGER , "+ KEY_QUESTION +" TEXT , "+ KEY_OPTIONONE +" TEXT , " + KEY_OPTIONTWO +" TEXT , " + KEY_OPTIONTHREE +" TEXT , " + KEY_OPTIONFOUR +" TEXT , " + KEY_CORRECTANSWER + " TEXT , FOREIGN KEY( " + KEY_ID +" ) REFERENCES " + TABLE_CATEGORY + "( " +KEY_ID + "), FOREIGN KEY( " + KEY_USER_ID +" ) REFERENCES " + TABLE_USER + "( " +KEY_USER_ID + ") )" ;
+    public final static String CREATE_QUESTION_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTION + " (" + KEY_USER_ID + " INTEGER , " + KEY_ID + " INTEGER , " + KEY_GRADE + " INTEGER , "+KEY_QUESTIONID+" INTEGER , "+ KEY_QUESTION +" TEXT , "+ KEY_OPTIONONE +" TEXT , " + KEY_OPTIONTWO +" TEXT , " + KEY_OPTIONTHREE +" TEXT , " + KEY_OPTIONFOUR +" TEXT , " + KEY_CORRECTANSWER + " TEXT , " +KEY_EXPLANATION + " TEXT , "+ "FOREIGN KEY( " + KEY_ID +" ) REFERENCES " + TABLE_CATEGORY + "( " +KEY_ID + "), FOREIGN KEY( " + KEY_USER_ID +" ) REFERENCES " + TABLE_USER + "( " +KEY_USER_ID + ") )" ;
+
 
 
 
