@@ -35,17 +35,57 @@ public class Question   {
      * The option number of the correct answer
      */
     private int correctAnswer;
-
+    /**
+     * Grade for which the question is applicable
+     */
     private int grade;
 
+    /**
+     * Category under which the question has to be listed
+     */
     private int categryId;
 
+    /**
+     * Who uploaded the question.
+     */
     private int userid;
 
-     /**
-     *
-     * @param questionId
+    /**
+     * Some explanation on the correct answer.
+     */
+    private String explanation;
 
+    /**
+     * Constructor for a question object
+     * @param questionId
+     * @param questionText
+     * @param optionOne
+     * @param optionTwo
+     * @param optionThree
+     * @param optionFour
+     * @param explanation
+     * @param correctAnswer
+     * @param grade
+     * @param userid
+     * @param categoryId
+     */
+    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour,int correctAnswer,String explanation, int grade, int userid, int categoryId ) {
+        this.questionId = questionId;
+        this.questionText = questionText;
+        this.optionOne = optionOne;
+        this.optionTwo = optionTwo;
+        this.optionThree = optionThree;
+        this.optionFour = optionFour;
+        this.correctAnswer = correctAnswer;
+        this.explanation = explanation;
+        this.grade = grade;
+        this.categryId = categoryId;
+        this.userid = userid;
+    }
+
+    /**
+     * Constructor 2
+     * @param questionId
      * @param questionText
      * @param optionOne
      * @param optionTwo
@@ -53,8 +93,7 @@ public class Question   {
      * @param optionFour
      * @param correctAnswer
      */
-
-    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour, int correctAnswer, int grade, int userid, int categoryId ) {
+    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour, int correctAnswer, String explanation ) {
         this.questionId = questionId;
         this.questionText = questionText;
         this.optionOne = optionOne;
@@ -62,18 +101,7 @@ public class Question   {
         this.optionThree = optionThree;
         this.optionFour = optionFour;
         this.correctAnswer = correctAnswer;
-        this.grade = grade;
-        this.categryId = categoryId;
-        this.userid = userid;
-    }
-    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour, int correctAnswer ) {
-        this.questionId = questionId;
-        this.questionText = questionText;
-        this.optionOne = optionOne;
-        this.optionTwo = optionTwo;
-        this.optionThree = optionThree;
-        this.optionFour = optionFour;
-        this.correctAnswer = correctAnswer;
+        this.explanation = explanation;
     }
 
     public int getGrade() {
@@ -87,8 +115,17 @@ public class Question   {
         return categryId;
     }
 
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
     public void setCategryId(int categryId) {
         this.categryId = categryId;
+
     }
 
     public int getUserid() {

@@ -5,17 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.JsonWriter;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.wischase.Category;
 import com.wischase.Question;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,22 +187,30 @@ public void insertSampleQuestions(SQLiteDatabase db)  {
         questionInfo.put(CreateTables.KEY_OPTIONTHREE, questionObject.getOptionThree());
         questionInfo.put(CreateTables.KEY_OPTIONFOUR, questionObject.getOptionFour());
         questionInfo.put(CreateTables.KEY_CORRECTANSWER, questionObject.getCorrectAnswer());
+        questionInfo.put(CreateTables.KEY_EXPLANATION, questionObject.getExplanation());
         questionInfo.put(CreateTables.KEY_USER_ID, questionObject.getUserid());
         questionInfo.put(CreateTables.KEY_ID, questionObject.getCategryId());
         questionInfo.put(CreateTables.KEY_GRADE, questionObject.getGrade());
         return questionInfo;
     }
+
+    /**
+     * Query the database for questions
+     * @param categoryId
+     * @param grade
+     * @return
+     */
     public List<Question> getAllQuestions ( int categoryId, int grade)  {
         SQLiteDatabase qDb = this.getReadableDatabase();
-        String[] columnQuestion = {CreateTables.KEY_QUESTIONID,CreateTables.KEY_QUESTION,CreateTables.KEY_OPTIONONE,CreateTables.KEY_OPTIONTWO, CreateTables.KEY_OPTIONTHREE, CreateTables.KEY_OPTIONFOUR};
-        Cursor questionCursor = qDb.query(CreateTables.TABLE_QUESTION, columnQuestion, CreateTables.KEY_ID +" = " +categoryId +CreateTables.KEY_GRADE +"="+grade,null,null,null,null);
-        List<Question> questionList = cursorToQuestion(questionCursor);
+        String[] columnQuestion = {CreateTables.KEY_QUESTIONID,CreateTables.KEY_QUESTION,CreateTables.KEY_OPTIONONE,CreateTables.KEY_OPTIONTWO, CreateTables.KEY_OPTIONTHREE, CreateTables.KEY_OPTIONFOUR, CreateTables.KEY_CORRECTANSWER, CreateTables.KEY_EXPLANATION, CreateTables.KEY_USER_ID};
+        Cursor questionCursor = qDb.query(CreateTables.TABLE_QUESTION, columnQuestion, CreateTables.KEY_ID + " = " + categoryId + " and " + CreateTables.KEY_GRADE + "=" + grade, null, null, null, null);
+        List<Question> questionList = cursorToQuestion(questionCursor, categoryId, grade);
 
                 qDb.close();
         return questionList;
     }
 
-    private List<Question> cursorToQuestion(Cursor questionCursor) {
+    private List<Question> cursorToQuestion(Cursor questionCursor, int categoryId, int grade) {
         int questionTextIndex = questionCursor.getColumnIndex(CreateTables.KEY_QUESTION);
         int questionIdIndex = questionCursor.getColumnIndex(CreateTables.KEY_QUESTIONID);
         int optionOneIndex = questionCursor.getColumnIndex(CreateTables.KEY_OPTIONONE);
@@ -214,11 +218,15 @@ public void insertSampleQuestions(SQLiteDatabase db)  {
         int optionThreeIndex = questionCursor.getColumnIndex(CreateTables.KEY_OPTIONTHREE);
         int optionFourIndex = questionCursor.getColumnIndex(CreateTables.KEY_OPTIONFOUR);
         int correctAnswerIndex = questionCursor.getColumnIndex(CreateTables.KEY_CORRECTANSWER);
+        int explanationIndex = questionCursor.getColumnIndex(CreateTables.KEY_EXPLANATION);
+        int userIdIndex = questionCursor.getColumnIndex(CreateTables.KEY_USER_ID);
+
 
         questionCursor.moveToFirst();
         List<Question> questionList = new ArrayList<Question>();
         while(!questionCursor.isAfterLast())    {
-                questionList.add(new Question(questionCursor.getInt(questionIdIndex), questionCursor.getString(questionTextIndex), questionCursor.getString(optionOneIndex), questionCursor.getString(optionTwoIndex), questionCursor.getString(optionThreeIndex),questionCursor.getString(optionFourIndex), questionCursor.getInt(correctAnswerIndex)));
+                questionList.add(new Question(questionCursor.getInt(questionIdIndex), questionCursor.getString(questionTextIndex), questionCursor.getString(optionOneIndex), questionCursor.getString(optionTwoIndex), questionCursor.getString(optionThreeIndex),questionCursor.getString(optionFourIndex), questionCursor.getInt(correctAnswerIndex), questionCursor.getString(explanationIndex), grade, questionCursor.getInt(userIdIndex), categoryId));
+
                 questionCursor.moveToNext();
             }
 
