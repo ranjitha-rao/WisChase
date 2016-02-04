@@ -6,6 +6,7 @@ import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
 import com.wischase.Category;
+import com.wischase.Question;
 
 import java.util.List;
 
@@ -61,4 +62,9 @@ public class DBHandlerTest extends AndroidTestCase
         dbRead.close();
     }
 
+    public void testgetAllQuestions() throws Exception {
+        List<Question> questionList = db.getAllQuestions(10, 2);
+        assertTrue(questionList.size() > 0);
+
+    }
 }
