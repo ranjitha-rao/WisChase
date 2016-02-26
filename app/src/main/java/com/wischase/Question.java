@@ -1,7 +1,5 @@
 package com.wischase;
 
-import android.database.Cursor;
-
 /**
  * Created by ranji on 12/28/2015.
  */

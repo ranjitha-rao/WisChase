@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.wischase.view.menu.ScrollingActivity" >
+
+<item
+        android:id="@+id/menu_main"
+        app:showAsAction="always"
+        android:title="menu_A"
+        android:visible="true">
+        <menu>
+        <item android:id="@+id/action_takeQuiz"
+            android:title="@string/action_take_quiz"
+            app:showAsAction="ifRoom"/>
+         <item android:id="@+id/action_upload_question"
+              android:title="@string/action_upload_question"
+              app:showAsAction="never"/>
+         <item android:id="@+id/action_upload_bank"
+            android:title="@string/action_upload_question_bank"
+            app:showAsAction="never"/>
+         <item android:id="@+id/action_exit"
+          android:title="@string/action_exit"
+          app:showAsAction="never"/>
+</menu>
+        </item>
+    </menu>

@@ -1,16 +1,10 @@
 package com.wischase.db;
 
-import android.test.InstrumentationTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-
-import junit.framework.TestCase;
-
 import android.content.Context;
+import android.test.InstrumentationTestCase;
 
 import com.google.gson.reflect.TypeToken;
 import com.wischase.Category;
-
-import junit.framework.TestCase;
 
 import java.lang.reflect.Type;
 import java.util.List;

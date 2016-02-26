@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">WisChase</string>
+    <string name="app_name">QuizWhiz</string>
+    <string name="action_take_quiz">Take Quiz</string>
+    <string name="action_upload_question">Upload a question</string>
+    <string name="action_upload_question_bank">Upload questions from a file</string>
+    <string name="action_exit">Exit</string>
+    <string name="title_activity_take_aquiz">TakeAQuiz</string>
+
 </resources>
