@@ -1,26 +1,24 @@
 package com.wischase;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.wischase.db.DBConstants;
-import com.wischase.db.DBHandler;
+import com.wischase.activity.TakeAQuiz;
+import com.wischase.view.menu.ScrollingActivity;
 
-import java.io.IOException;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ScrollingActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+    }
+    public void takeAQuiz(View inputView)  {
+        setContentView(R.layout.activity_take_aquiz);
+        Intent intent = new Intent(this, TakeAQuiz.class);
+        startActivity(intent);
+    }
 }
