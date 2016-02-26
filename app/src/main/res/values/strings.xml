@@ -6,7 +6,6 @@
     <string name="action_exit">Exit</string>
     <string name="title_activity_take_aquiz">TakeAQuiz</string>
 
-    <string name="app_name">WisChase</string>
         <string-array name="grade_array">
         <item>Pre-K</item>
         <item>Kindergarten</item>
