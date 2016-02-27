@@ -10,15 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:popupTheme="@style/AppTheme.PopupOverlay"
         app:logo="@mipmap/quizwhiz_icon"
         app:logoDescription=""
-        >
+         >
         <com.wischase.view.CustomTextView
+            android:id="@id/action_bar_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/app_name"
-            android:gravity="center"
             android:textSize="@dimen/title_fontsize"
             android:layout_margin="@dimen/text_margin"
             android:paddingStart="@dimen/abc_action_bar_content_inset_material" />
