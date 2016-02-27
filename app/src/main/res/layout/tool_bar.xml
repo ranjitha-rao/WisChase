@@ -1,29 +1,27 @@
-<android.support.design.widget.AppBarLayout xmlns:android2="http://schemas.android.com/apk/res/android"
-    android2:layout_width="match_parent"
-    android2:layout_height="?attr/actionBarSize"
-    xmlns:android="http://schemas.android.com/tools"
+<android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
     android:theme="@style/AppTheme.AppBarOverlay"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.v7.widget.Toolbar
-        android2:id="@+id/app_bar"
-        android2:layout_width="match_parent"
-        android2:layout_height="?attr/actionBarSize"
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android2:title="@string/app_name"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:popupTheme="@style/AppTheme.PopupOverlay"
         app:logo="@mipmap/quizwhiz_icon"
-        app:logoDescription="@string/app_name"
-        app:title=""
+        app:logoDescription=""
         >
         <com.wischase.view.CustomTextView
-            android2:layout_width="wrap_content"
-            android2:layout_height="match_parent"
-            android2:text="@string/app_name"
-            android2:gravity="center"
-            android2:textSize="@dimen/title_fontsize"
-            android2:layout_margin="@dimen/text_margin"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:gravity="center"
+            android:textSize="@dimen/title_fontsize"
+            android:layout_margin="@dimen/text_margin"
+            android:paddingStart="@dimen/abc_action_bar_content_inset_material" />
 
 </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>
