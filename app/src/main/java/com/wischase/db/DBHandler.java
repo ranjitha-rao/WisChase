@@ -132,7 +132,7 @@ public class DBHandler extends SQLiteOpenHelper{
     }
 
     private long addUserInfo(String userName, SQLiteDatabase userDB) {
-        // User name as eneterd by the user
+        // User name as entered by the user
         ContentValues userInfo = new ContentValues(1);
         userInfo.put(CreateTables.KEY_USERNAME,userName);
         // Get the rowid. This will be the user id.
@@ -189,7 +189,7 @@ public void insertSampleQuestions(SQLiteDatabase db)  {
         questionInfo.put(CreateTables.KEY_CORRECTANSWER, questionObject.getCorrectAnswer());
         questionInfo.put(CreateTables.KEY_EXPLANATION, questionObject.getExplanation());
         questionInfo.put(CreateTables.KEY_USER_ID, questionObject.getUserid());
-        questionInfo.put(CreateTables.KEY_ID, questionObject.getCategryId());
+        questionInfo.put(CreateTables.KEY_ID, questionObject.getCategoryId());
         questionInfo.put(CreateTables.KEY_GRADE, questionObject.getGrade());
         return questionInfo;
     }
