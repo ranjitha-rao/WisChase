@@ -46,7 +46,7 @@ public class CreateTables {
     /**
      * Create statement for User table. Intial data setup
      */
-    public final static String CREATE_USER_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_USER + " (" + KEY_USER_ID + " INTEGER PRIMARY KEY," + KEY_USERNAME + " TEXT )";
+    public final static String CREATE_USER_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_USER + " (" + KEY_USER_ID + " INTEGER PRIMARY KEY," + KEY_USERNAME + " TEXT not null unique )";
 
     public static final String TABLE_QUESTION = "question";
     public static final String KEY_GRADE = "grade";

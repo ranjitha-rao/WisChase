@@ -55,10 +55,12 @@ public class DBHandlerTest extends AndroidTestCase
     }
 
     public void testInsertUserInfo() throws Exception {
-        long categoryId = db.insertUserInfo("testUserName");
-        assertTrue(categoryId != -1);
+        long userId = db.insertUserInfo("testUserName");
+        assertTrue(userId != -1);
+        long duplicateUserId = db.insertUserInfo("testUserName");
+        assertTrue(duplicateUserId == -1);
         SQLiteDatabase dbRead = db.getWritableDatabase();
-        dbRead.delete(CreateTables.TABLE_CATEGORY, CreateTables.KEY_ID + " = " + categoryId, null);
+        dbRead.delete(CreateTables.TABLE_USER, CreateTables.KEY_USER_ID + " = " + userId, null);
         dbRead.close();
     }
 
