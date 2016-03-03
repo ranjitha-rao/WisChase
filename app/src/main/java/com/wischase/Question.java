@@ -1,9 +1,12 @@
 package com.wischase;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by ranji on 12/28/2015.
  */
-public class Question   {
+public class Question  implements Parcelable {
 
     /**
      *  The questionId is the rowid for the question
@@ -41,18 +44,21 @@ public class Question   {
     /**
      * Category under which the question has to be listed
      */
-    private int categryId;
+    private int categoryId;
 
     /**
      * Who uploaded the question.
      */
-    private int userid;
+    private long userid;
 
     /**
      * Some explanation on the correct answer.
      */
     private String explanation;
 
+    public Question()   {
+
+    }
     /**
      * Constructor for a question object
      * @param questionId
@@ -67,7 +73,7 @@ public class Question   {
      * @param userid
      * @param categoryId
      */
-    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour,int correctAnswer,String explanation, int grade, int userid, int categoryId ) {
+    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour,int correctAnswer,String explanation, int grade, long userid, int categoryId ) {
         this.questionId = questionId;
         this.questionText = questionText;
         this.optionOne = optionOne;
@@ -77,66 +83,27 @@ public class Question   {
         this.correctAnswer = correctAnswer;
         this.explanation = explanation;
         this.grade = grade;
-        this.categryId = categoryId;
+        this.categoryId = categoryId;
         this.userid = userid;
     }
 
-    /**
-     * Constructor 2
-     * @param questionId
-     * @param questionText
-     * @param optionOne
-     * @param optionTwo
-     * @param optionThree
-     * @param optionFour
-     * @param correctAnswer
-     */
-    public Question(int questionId, String questionText, String optionOne, String optionTwo, String optionThree, String optionFour, int correctAnswer, String explanation ) {
-        this.questionId = questionId;
-        this.questionText = questionText;
-        this.optionOne = optionOne;
-        this.optionTwo = optionTwo;
-        this.optionThree = optionThree;
-        this.optionFour = optionFour;
-        this.correctAnswer = correctAnswer;
-        this.explanation = explanation;
-    }
+    public  int getGrade() { return grade;     }
 
-    public int getGrade() {
-        return grade;
-    }
+    public void setGrade(int grade) { this.grade = grade;   }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-    public int getCategryId() {
-        return categryId;
-    }
+    public int getCategoryId() { return categoryId;    }
 
-    public String getExplanation() {
-        return explanation;
-    }
+    public String getExplanation() {    return explanation;    }
 
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
-    }
+    public void setExplanation(String explanation) {    this.explanation = explanation;     }
 
-    public void setCategryId(int categryId) {
-        this.categryId = categryId;
+    public void setCategoryId(int categoryId) {   this.categoryId = categoryId;     }
 
-    }
+    public long getUserid() {   return userid;     }
 
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
+    public void setUserid(long userid) {
         this.userid = userid;
     }
-
-    /**
-     * The grade for which this question is applicable
-     */
 
     public int getQuestionId() {
         return questionId;
@@ -194,5 +161,48 @@ public class Question   {
         this.correctAnswer = correctAnswer;
     }
 
+    /* Parcelable interface implementation*/
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel questionParcel, int flags) {
+        questionParcel.writeInt(questionId);
+        questionParcel.writeString((questionText == null) ? "" : questionText);
+        questionParcel.writeString((optionOne == null) ? "" : optionOne);
+        questionParcel.writeString((optionTwo == null) ? "" : optionTwo);
+        questionParcel.writeString((optionThree == null) ? "" : optionThree);
+        questionParcel.writeString((optionFour == null) ? "" : optionFour);
+        questionParcel.writeInt(correctAnswer);
+        questionParcel.writeString((explanation == null) ? "" : explanation);
+        questionParcel.writeInt(grade);
+        questionParcel.writeInt(categoryId);
+        questionParcel.writeLong(userid);
+    }
+
+    public Question(Parcel questionParcel)  {
+        questionId = questionParcel.readInt();
+        questionText = questionParcel.readString();
+        optionOne = questionParcel.readString();
+        optionTwo = questionParcel.readString();
+        optionThree = questionParcel.readString();
+        optionFour = questionParcel.readString();
+        correctAnswer = questionParcel.readInt();
+        explanation = questionParcel.readString();
+        grade = questionParcel.readInt();
+        categoryId = questionParcel.readInt();
+        userid = questionParcel.readLong();
+    }
+    public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
+        public Question createFromParcel(Parcel in) {
+            return new Question(in);
+        }
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
+    /* Parcelable interface implementation*/
 
 }
