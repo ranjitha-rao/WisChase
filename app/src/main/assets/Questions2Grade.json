@@ -10,7 +10,7 @@
        "correctAnswer" : "1",
        "explanation"  :"Provides  lubrication and protection against bacteria",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -23,7 +23,7 @@
        "correctAnswer" : "2",
        "explanation"  :"They deal with sound and vibration",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -36,7 +36,7 @@
        "correctAnswer" : "2",
        "explanation"  :"Its temperature sensor element helps to measure body temperature",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -49,7 +49,7 @@
        "correctAnswer" : "2",
        "explanation"  :"A tornado is a violently rotating column of air",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -62,7 +62,7 @@
        "correctAnswer" : "4",
        "explanation"  :"They are native to Africa",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -75,7 +75,7 @@
        "correctAnswer" : "1",
        "explanation"  :"Mars is often called the 'Red Planet' because it appears in the sky as an orange-red star.",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -88,7 +88,7 @@
        "correctAnswer" : "1",
        "explanation"  : "The name albatross is derived from the Arabic",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -101,7 +101,7 @@
        "correctAnswer" : "3",
        "explanation"  : "Chimpanzees are an exclusively African species",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -114,7 +114,7 @@
        "correctAnswer" : "2",
        "explanation"  : "The name is because of their ability to consume very little water without dehydrating.",
        "grade" : "2",
-       "categryId" : "10",
+       "categoryId" : "10",
        "userid" : "1"
      },
      {
@@ -127,7 +127,7 @@
        "correctAnswer" : "2",
        "explanation"  : "",
        "grade" : "2",
-       "categryId" : "1",
+       "categoryId" : "1",
        "userid" : "1"
      },
      {
@@ -140,7 +140,7 @@
        "correctAnswer" : "3",
        "explanation"  : "",
        "grade" : "2",
-       "categryId" : "1",
+       "categoryId" : "1",
        "userid" : "1"
      },
      {
@@ -153,7 +153,7 @@
        "correctAnswer" : "2",
        "grade" : "2",
        "explanation"  : "",
-       "categryId" : "1",
+       "categoryId" : "1",
        "userid" : "1"
      },
      {
@@ -166,7 +166,7 @@
        "correctAnswer" : "2",
        "explanation"  : "",
        "grade" : "2",
-       "categryId" : "1",
+       "categoryId" : "1",
        "userid" : "1"
      },
      {
@@ -179,7 +179,7 @@
        "correctAnswer" : "4",
        "explanation"  : "",
        "grade" : "2",
-       "categryId" : "1",
+       "categoryId" : "1",
        "userid" : "1"
      }
    ]
