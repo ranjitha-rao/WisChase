@@ -1,12 +1,15 @@
 package com.wischase;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ranjitha on 12/12/2015.
  */
-public class Category {
+public class Category implements Parcelable{
     private String categoryName;
     private List<SubCategory> subCategory;
 
@@ -49,33 +52,30 @@ public class Category {
         }
         this.subCategory.add(new SubCategory( subCategory,categoryId ));
     }
-    public class SubCategory {
-        private String subCategory;
-        private int categoryId;
 
-        public SubCategory(String subCategory, int categoryId)    {
-            this.subCategory = subCategory;
-            this.categoryId = categoryId;
-        }
-
-        public SubCategory()    {
-
-        }
-        public String getSubCategory() {
-            return subCategory;
-        }
-
-        public void setSubCategory(String subCategory) {
-            this.subCategory = subCategory;
-        }
-
-        public int getCategoryId() {
-            return categoryId;
-        }
-
-        public void setCategoryId(int categoryId) {
-            this.categoryId = categoryId;
-        }
-
+    @Override
+    public int describeContents() {
+        return 0;
     }
+
+    @Override
+    public void writeToParcel(Parcel categoryParcel, int flags) {
+        categoryParcel.writeString(categoryName);
+        categoryParcel.writeTypedList(subCategory);
+    }
+    public Category(Parcel categoryParcel) {
+        categoryName = categoryParcel.readString();
+        subCategory = new ArrayList<SubCategory>();
+        categoryParcel.readTypedList(subCategory, SubCategory.CREATOR);
+    }
+
+    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
+        public Category createFromParcel(Parcel in) {
+            return new Category(in);
+        }
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
+
 }

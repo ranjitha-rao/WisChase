@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.wischase.Category;
 import com.wischase.Question;
 import com.wischase.R;
 import com.wischase.db.DBHandler;
@@ -26,9 +27,11 @@ public class TakeAQuiz extends ScrollingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent inputIntent = getIntent();
-        Question question = (Question)(inputIntent.getParcelableExtra(ActivityConstants.QUESTION_INPUT));
+        Category userInput = (Category)(inputIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
+        int gradeInput = inputIntent.getIntExtra(ActivityConstants.GRADE_INPUT,0);
         DBHandler dbHandle = new DBHandler(this);
-        questionList = dbHandle.getAllQuestions(question.getCategoryId(), question.getGrade());
+        int categoryIdInput = userInput.getSubCategory().get(0).getCategoryId();
+        questionList = dbHandle.getAllQuestions(categoryIdInput, gradeInput);
         setContentView(R.layout.activity_take_aquiz);
         updateQuestion(questionList.get(questionIndex));
         questionIndex++;

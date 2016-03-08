@@ -21,10 +21,14 @@ public class MainActivity extends ScrollingActivity {
     public void takeAQuiz(View inputView)  {
         setContentView(R.layout.activity_take_aquiz);
         Intent intent = new Intent(this, TakeAQuiz.class);
-        Question questionInput = new Question();
-        questionInput.setCategoryId(10);
-        questionInput.setGrade(2);
-        intent.putExtra(ActivityConstants.QUESTION_INPUT, questionInput);
+
+
+        /** Test Input **/
+        Category userInput = new Category("Sceince", "Physics",10);
+        intent.putExtra(ActivityConstants.USER_INPUT, userInput);
+        intent.putExtra(ActivityConstants.GRADE_INPUT, 2);
+        /** Test Input **/
+
         startActivity(intent);
     }
 }
