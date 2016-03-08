@@ -5,16 +5,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 import com.wischase.Category;
 import com.wischase.Question;
+import com.wischase.SubCategory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by ranjitha on 12/12/2015.
@@ -75,9 +81,9 @@ public class DBHandler extends SQLiteOpenHelper{
             List<Category> categoryArray = (List<Category>) JsonUtil.categoryFromJson(context, DBConstants.JSON_FILE_NAME, listType);
             // After the list is read now it is time insert into DB
             for (Category categoryObject:categoryArray)              {
-                List<Category.SubCategory> subCategoryList = categoryObject.getSubCategory();
+                List<SubCategory> subCategoryList = categoryObject.getSubCategory();
                 // This is required because each subcategory needs its own id
-                for (Category.SubCategory subCategory : subCategoryList) {
+                for (SubCategory subCategory : subCategoryList) {
                     // Create key value pair to insert into DB
                     insertCategoryInfo(categoryObject.getCategory(), subCategory.getSubCategory(), db);
                 }
@@ -93,17 +99,17 @@ public class DBHandler extends SQLiteOpenHelper{
      * with their category id
      * @throws IOException
      */
-    public List<Category> getAllCategories() throws IOException {
+    public Map<String, Category> getAllCategories() throws IOException {
         SQLiteDatabase categoryDB = this.getReadableDatabase();
         // Column to be returned from DB.
         String[] columns = {CreateTables.KEY_ID,CreateTables.KEY_CATEGORYNAME,CreateTables.KEY_SUBCATEGORY};
         // The below query returns rows which are grouped by category name. The rows with same category and ordered by category id
-        Cursor categoryCursor= categoryDB.query(CreateTables.TABLE_CATEGORY, columns, null, null, CreateTables.KEY_CATEGORYNAME, null, CreateTables.KEY_ID, null);
+        Cursor categoryCursor= categoryDB.query(CreateTables.TABLE_CATEGORY, columns, null, null, null, null, null, null);
         categoryCursor.moveToFirst();
         // This will combine rows with same category name and add the subcategories
-        List<Category> categoryList = cursorToCategoryList(categoryCursor);
+        Map<String, Category> categoryMap = cursorToCategoryList(categoryCursor);
         categoryDB.close();
-        return categoryList;
+        return categoryMap;
     }
 
     public long insertUserAddedCatInfo(String category, String subCategory) {
@@ -238,26 +244,27 @@ public void insertSampleQuestions(SQLiteDatabase db)  {
      * @param categoryCursor Database result with all the categories
      * @return List that was created from the list
      */
-    private List<Category> cursorToCategoryList(Cursor categoryCursor) {
+    private Map<String, Category> cursorToCategoryList(Cursor categoryCursor) {
         String categoryName = "";
         int columnIndexOfCategory = categoryCursor.getColumnIndex(JsonUtil.JSON_FIELD_CATEGORY);
         int columnIndexOfSubCategory = categoryCursor.getColumnIndex(JsonUtil.JSON_FIELD_SUBCATEGORY);
         int columnIndexOfCategoryId = categoryCursor.getColumnIndex(JsonUtil.JSON_FIELD_CATEGORYID);
+        Map<String,Category> categoryMap = new HashMap<String,Category>();
 
-        List<Category> categoryList = new ArrayList<Category>();
         try {
             while (!categoryCursor.isAfterLast()) {
                 // If the category name of this row is same as the previous row then
                 // just add the subcategory to the recently added category object
                 if (categoryName != null && categoryName.equals(categoryCursor.getString(columnIndexOfCategory))) {
-                    categoryList.get(0).add(categoryCursor.getString(columnIndexOfSubCategory), categoryCursor.getInt(columnIndexOfCategoryId));
+                     categoryMap.get(categoryName).add(categoryCursor.getString(columnIndexOfSubCategory), categoryCursor.getInt(columnIndexOfCategoryId));
                 } else {
+
                     // This is a new category so create a new object with the row data
                     categoryName = categoryCursor.getString(columnIndexOfCategory);
                     String subCategoryName = categoryCursor.getString(columnIndexOfSubCategory);
                     int categoryId = categoryCursor.getInt(columnIndexOfCategoryId);
                     // add the new object at the index so it is easy to pull out and add the sub categories
-                    categoryList.add(0, new Category(categoryName, subCategoryName, categoryId));
+                    categoryMap.put(categoryName, new Category(categoryName, subCategoryName, categoryId));
                 }
                 categoryCursor.moveToNext();
             }
@@ -266,8 +273,7 @@ public void insertSampleQuestions(SQLiteDatabase db)  {
         catch(Exception e)  {
             Log.d("Data error : ",e.getMessage());
         }
-
-        return (categoryList);
+        return (categoryMap);
     }
 
     /**

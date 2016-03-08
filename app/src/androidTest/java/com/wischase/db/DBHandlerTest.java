@@ -9,6 +9,7 @@ import com.wischase.Category;
 import com.wischase.Question;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ranji on 12/27/2015.
@@ -42,7 +43,7 @@ public class DBHandlerTest extends AndroidTestCase
     }
 
     public void testGetAllCategories() throws Exception {
-        List<Category> categoryList = db.getAllCategories();
+        Map<String, Category> categoryList = db.getAllCategories();
         assertTrue(categoryList.size() > 0);
     }
 
