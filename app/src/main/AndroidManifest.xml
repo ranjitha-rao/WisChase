@@ -20,6 +20,8 @@
             android:name=".activity.LogInScreen"
             android:label="@string/title_activity_take_aquiz"
             android:theme="@style/AppTheme">
+            </activity>
+        <activity android:name=".activity.QuestionUpload">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
