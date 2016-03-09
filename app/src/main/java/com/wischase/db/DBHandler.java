@@ -137,13 +137,36 @@ public class DBHandler extends SQLiteOpenHelper{
         return userId;
     }
 
+    /**
+     * This method will insert the user info into the DB if it does not
+     * already exist
+     * @param userName user Name to insert
+     * @param userDB Depending when it is called you will need to pass the DB info
+     * @return Returns the newly created usere id or if user already exists then the
+     * existing userid
+     */
     private long addUserInfo(String userName, SQLiteDatabase userDB) {
         // User name as entered by the user
         ContentValues userInfo = new ContentValues(1);
-        userInfo.put(CreateTables.KEY_USERNAME,userName);
+        userInfo.put(CreateTables.KEY_USERNAME, userName);
         // Get the rowid. This will be the user id.
-        long userId = userDB.insert(CreateTables.TABLE_USER, null, userInfo);
-        return userId;
+        /** long userId = userDB.insertWithOnConflict(CreateTables.TABLE_USER, null, userInfo,SQLiteDatabase.CONFLICT_IGNORE);
+         * As per the documentation this should work but there is a issue in the SDK and the documentation is wrong.
+         * https://code.google.com/p/android/issues/detail?id=13045
+         * When the above issue is resolved we should use the above cove code
+         */
+        long userid = 0;
+        Cursor userExists;
+        String[] userIdColumn = {CreateTables.KEY_USER_ID};
+        userExists = userDB.query(CreateTables.TABLE_USER,userIdColumn,CreateTables.KEY_USERNAME + " = '"+userName + "'",null,null,null,null);
+        if(userExists != null && userExists.getCount() == 1) {
+            userExists.moveToFirst();
+            userid = userExists.getLong(userExists.getColumnIndex(CreateTables.KEY_USER_ID));
+        }
+        else {
+            userid = userDB.insert(CreateTables.TABLE_USER, null, userInfo);
+        }
+        return userid;
     }
 
     /* User DB operation - start */

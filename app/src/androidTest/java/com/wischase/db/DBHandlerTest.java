@@ -59,7 +59,7 @@ public class DBHandlerTest extends AndroidTestCase
         long userId = db.insertUserInfo("testUserName");
         assertTrue(userId != -1);
         long duplicateUserId = db.insertUserInfo("testUserName");
-        assertTrue(duplicateUserId == -1);
+        assertTrue(duplicateUserId == userId);
         SQLiteDatabase dbRead = db.getWritableDatabase();
         dbRead.delete(CreateTables.TABLE_USER, CreateTables.KEY_USER_ID + " = " + userId, null);
         dbRead.close();
