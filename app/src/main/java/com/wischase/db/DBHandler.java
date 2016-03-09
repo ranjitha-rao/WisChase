@@ -169,6 +169,13 @@ public class DBHandler extends SQLiteOpenHelper{
         return userid;
     }
 
+    public boolean getUserInfo(String userName, SQLiteDatabase userDB) {
+
+       //This is incomplete
+        return true;
+    }
+
+
     /* User DB operation - start */
     /* Question table DB operation -start */
 public void insertSampleQuestions(SQLiteDatabase db)  {
