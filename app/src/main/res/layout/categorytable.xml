@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<TableRow>
+    <com.wischase.view.CustomTextView
+        android:textSize="12sp"
+        android:text="Grade \nLevel"
+        android:padding="@dimen/textPadding"
+        android:textColor="@color/colorText" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:background="@color/colorColumn"
+        />
+    <com.wischase.view.CustomTextView
+
+        android:textSize="16sp"
+        android:text="K"
+        android:padding="@dimen/textPadding"
+        android:textColor="@color/colorText"
+        android:id="@+id/grade"/>
+
+
+</TableRow>
+<View
+android:layout_height="@dimen/rowLineHeight"
+android:background="@color/colorColumn" />
+
+<TableRow>
+<com.wischase.view.CustomTextView
+    android:textSize="12sp"
+    android:text="Category"
+    android:padding="@dimen/textPadding"
+    android:textColor="@color/colorText"
+    />
+
+<ImageView
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="4dip"
+    android:layout_marginRight="4dip"
+    android:background="@color/colorColumn"
+    />
+<com.wischase.view.CustomTextView
+    android:textSize="16sp"
+    android:text="Math"
+    android:padding="@dimen/textPadding"
+    android:textColor="@color/colorText"
+    android:id="@+id/category"/>
+
+</TableRow>
+<View
+android:layout_height="@dimen/rowLineHeight"
+android:background="@color/colorColumn" />
+
+<TableRow>
+<com.wischase.view.CustomTextView
+    android:textSize="12sp"
+    android:text="SubCategory"
+    android:padding="@dimen/textPadding"
+    android:textColor="@color/colorText"
+    />
+
+<ImageView
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="4dip"
+    android:layout_marginRight="4dip"
+    android:background="@color/colorColumn"
+    />
+
+<com.wischase.view.CustomTextView
+    android:textSize="16sp"
+    android:text="Addition"
+    android:padding="@dimen/textPadding"
+    android:textColor="@color/colorText"
+    android:id="@+id/subcategory"/>
+
+</TableRow>
+
+    </TableLayout>
