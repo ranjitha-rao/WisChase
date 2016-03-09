@@ -5,6 +5,10 @@
     <string name="action_upload_question_bank">Upload questions from a file</string>
     <string name="action_exit">Exit</string>
     <string name="title_activity_take_aquiz">TakeAQuiz</string>
+    <string name="welcome_Msg">Welcome to QuizWhiz</string>
+    <string name="user_Name">UserName :</string>
+    <string name="logIn_SignUp">SignUp</string>
+    <string name="logIn_SignIn">LogIn</string>
 
         <string-array name="grade_array">
         <item>Pre-K</item>
