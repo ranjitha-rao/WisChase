@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Category implements Parcelable{
     private String categoryName;
-    private List<SubCategory> subCategory;
+    private static List<SubCategory> subCategory;
 
     public Category()   {
 
@@ -35,7 +35,7 @@ public class Category implements Parcelable{
         this.categoryName = category;
     }
 
-    public List<SubCategory> getSubCategory() {
+    public static List<SubCategory> getSubCategory() {
         if(subCategory == null) {
             subCategory = new ArrayList<SubCategory>();
         }
@@ -77,5 +77,8 @@ public class Category implements Parcelable{
             return new Category[size];
         }
     };
-
+@Override
+    public String toString(){
+    return categoryName;
+    }
 }

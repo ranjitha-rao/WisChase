@@ -28,7 +28,7 @@ public class LogInScreen extends ScrollingActivity {
                 if (UserId != x) {
                     //Toast.makeText(getApplicationContext(), "UserId:" +UserId, Toast.LENGTH_SHORT).show();
                     setContentView(R.layout.activity_take_aquiz);
-                    Intent i = new Intent(getBaseContext(),TakeAQuiz.class);
+                    Intent i = new Intent(getBaseContext(),Selectionscreen.class);
                     startActivity(i);
                 }
                     else{
