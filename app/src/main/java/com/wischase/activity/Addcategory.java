@@ -28,7 +28,7 @@ EditText category,subcategory;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addcategory);
-        categoryspinner=(Spinner)findViewById(R.id.category_spinner);
+        categoryspinner=(Spinner)findViewById(R.id.spinner);
         DBHandler db = new DBHandler(getApplicationContext());
         try {
             categorylist = db.getAllCategories();
