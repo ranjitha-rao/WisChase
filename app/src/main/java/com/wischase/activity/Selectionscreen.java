@@ -1,17 +1,12 @@
 package com.wischase.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,25 +17,19 @@ import com.wischase.db.DBHandler;
 import com.wischase.view.menu.ScrollingActivity;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.text.CollationKey;
 import java.util.Collection;
-import java.util.EventObject;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
+
+import static java.lang.String.*;
 
 public class Selectionscreen extends ScrollingActivity implements AdapterView.OnItemSelectedListener {
     Spinner gradearray, categorydd, subcategorydd; //variable to define the Grade drop down, Category and Sub Category dropdown.
     Map<String, Category> categorylist;
     List<SubCategory> subcategorylist;
     Button nextbutton, addcategorybutton;
-    List<Category> list;
     List<SubCategory> sublist;
-    String category;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +46,6 @@ public class Selectionscreen extends ScrollingActivity implements AdapterView.On
                 } else
                     Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " Selected", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -67,40 +55,69 @@ public class Selectionscreen extends ScrollingActivity implements AdapterView.On
         addcategorybutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addcatIntent = new Intent(Selectionscreen.this, Addcategory.class);
-                startActivity(addcatIntent);
+                Intent categoryIntent = new Intent(getBaseContext(), Addcategory.class);
+                SubCategory subcategory = new SubCategory();
+                subcategory.getCategoryId();
+                categoryIntent.putExtra(ActivityConstants.GRADE_INPUT, subcategory);
+                startActivity(categoryIntent);
             }
         });
         nextbutton = (Button) findViewById(R.id.Next);
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if else to be written.
-                Intent nextIntent = new Intent(Selectionscreen.this, Optionscreen.class);
+                Intent nextIntent = new Intent(getBaseContext(), Optionscreen.class);
+                SubCategory subcategory = new SubCategory();
+                subcategory.getCategoryId();
+                nextIntent.putExtra(ActivityConstants.GRADE_INPUT,subcategory);
                 startActivity(nextIntent);
             }
         });
     }
-
     void updateCategory() {
         categorydd = (Spinner) findViewById(R.id.category_spinner);
         DBHandler db = new DBHandler(getApplicationContext());
         try {
             categorylist = db.getAllCategories();
-            Collection<Category> list = categorylist.values();
-            ArrayAdapter<Category> dataadapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item);
+            Collection<String> list = categorylist.keySet();
+            ArrayAdapter<String> dataadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
             dataadapter.addAll(list);
             dataadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             categorydd.setAdapter(dataadapter);
-        } catch (IOException e) {
+           } catch (IOException e) {
             e.printStackTrace();
         }
+    categorydd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " Selected ", Toast.LENGTH_SHORT).show();
+            subcategorydd = (Spinner) findViewById(R.id.subcategory_spinner);
+            subcategorylist = Category.getSubCategory();
+            sublist =subcategorylist.subList(position,10);
+            updateSubcategory();
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    });
+    }
+   private void updateSubcategory() {
+       ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item);
+        adapter.addAll(String.valueOf(sublist));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        subcategorydd.setAdapter(adapter);
+                subcategorydd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getBaseContext(),parent.getItemAtPosition(position) +"Selected ",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        }
+    }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

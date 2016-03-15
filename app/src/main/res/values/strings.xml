@@ -13,6 +13,7 @@
     <string name="user_Name">user_Name</string>
     <string name="logIn_SignUp">logIn_SignUp</string>
     <string name="logIn_SignIn">logIn_SignIn</string>
+    <string name="title_activity_answer_upload">title_activity_answer_upload</string>
 
 
     <string-array name="grade_array">
