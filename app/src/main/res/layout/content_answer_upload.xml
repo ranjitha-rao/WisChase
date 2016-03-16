@@ -15,9 +15,7 @@
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gridLayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true">
+        android:id="@+id/gridLayout">
 
         <include layout="@layout/categorytable"
             android:layout_width="wrap_content"
@@ -27,6 +25,7 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:id="@+id/options"
             android:layout_row="1"
             android:layout_column="0"
             android:layout_rowSpan="9">
@@ -80,6 +79,7 @@
             android:background="@android:color/white"
             android:textColor="@color/colorBackground"
             android:id="@+id/up_option1"
+            android:text=" "
             android:layout_row="1"
             android:layout_column="1"
             android:layout_gravity="fill_horizontal|center_horizontal" />
@@ -98,6 +98,7 @@
             android:id="@+id/up_option2"
             android:layout_gravity="fill_horizontal|center_horizontal"
             android:layout_row="3"
+            android:text=" "
             android:layout_column="1" />
         <ImageView
             android:layout_column="1"
@@ -113,6 +114,7 @@
             android:textColor="@color/colorBackground"
             android:layout_gravity="fill_horizontal|center_horizontal"
             android:id="@+id/up_option3"
+            android:text=" "
             android:layout_row="5"
             android:layout_column="1"
             />
@@ -132,6 +134,7 @@
             android:layout_gravity="fill_horizontal|center_horizontal"
             android:id="@+id/up_option4"
             android:layout_row="7"
+            android:text=" "
             android:layout_column="1" />
         <ImageView
             android:layout_column="1"
@@ -147,7 +150,8 @@
             android:text="Upload"
             android:id="@+id/upload_answer"
             android:layout_row="9"
-            android:layout_column="0" />
+            android:layout_column="0"
+             android:onClick="uploadAnswer"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -155,7 +159,8 @@
             android:text="Explanation"
             android:id="@+id/next_explanation"
             android:layout_row="9"
-            android:layout_column="1" />
+            android:layout_column="1"
+            android:onClick="nextExplanation"/>
 
     </GridLayout>
 

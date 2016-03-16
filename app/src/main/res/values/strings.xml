@@ -30,4 +30,6 @@
         <item>Grade 9</item>
         <item>Grade 10</item>
     </string-array>
+    <string name="title_activity_answer_upload">AnswerUpload</string>
+    <string name="title_activity_explanation_upload">ExplanationUpload</string>
 </resources>
