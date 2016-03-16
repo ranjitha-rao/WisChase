@@ -23,72 +23,105 @@
         <com.wischase.view.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a New Category:"
+            android:text="Category: "
             android:textSize="20dp"
             android:textColor="#fefdfd"
-            android:padding="20dp"
             android:id="@+id/textView"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="41dp" />
+            android:layout_marginTop="39dp" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addnewcategory"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+        <Spinner
+            android:layout_width="@dimen/fontsize"
+            android:layout_height="@dimen/text_margin"
+            android:id="@+id/spinner"
+            android:layout_alignBottom="@+id/textView"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:background="#ffffff"
-            android:textColor="#171515">
-            <requestFocus/>
-        </EditText>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Category"
-            android:id="@+id/addcategory"
-            android:layout_below="@+id/addnewcategory"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignTop="@+id/textView"
+            android:layout_toRightOf="@+id/textView"
+            android:layout_toEndOf="@+id/textView"
+            android:visibility="visible"
+            android:spinnerMode="dropdown"
+            android:clickable="true"
+            android:contextClickable="true"
+            android:background="#ffffff" />
 
         <com.wischase.view.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a New Sub-Category"
-            android:id="@+id/textView2"
+            android:text="Add New Category: "
             android:textSize="20dp"
             android:textColor="#fefdfd"
-            android:padding="20dp"
-            android:layout_below="@+id/addcategory"
+            android:id="@+id/textView2"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="41dp" />
+
+        <com.wischase.view.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New Sub-Category: "
+            android:textSize="20dp"
+            android:textColor="#fefdfd"
+            android:id="@+id/textView7"
+            android:layout_below="@+id/editText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/addnewsubcategory"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:id="@+id/editText"
             android:layout_below="@+id/textView2"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/textView2"
+            android:layout_alignRight="@+id/spinner"
+            android:layout_alignEnd="@+id/spinner"
             android:background="#ffffff"
-            android:textColor="#171515">
-            <requestFocus/>
-        </EditText>
+            android:editable="true"
+            android:inputType="text"
+            android:visibility="visible" />
 
-        <Button
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText2"
+            android:layout_below="@+id/textView7"
+            android:layout_alignLeft="@+id/editText"
+            android:layout_alignStart="@+id/editText"
+            android:layout_alignRight="@+id/spinner"
+            android:layout_alignEnd="@+id/spinner"
+            android:background="#ffffff"
+            android:visibility="visible"
+            android:inputType="text" />
+
+        <com.wischase.view.CustomButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD SUBCATEGORY"
-            android:id="@+id/addsubcategory"
-            android:layout_below="@+id/addnewsubcategory"
-            android:layout_alignLeft="@+id/addcategory"
-            android:layout_alignStart="@+id/addcategory" />
+            android:text="Back"
+            android:id="@+id/backbutton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <com.wischase.view.CustomButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/submitbutton"
+            android:layout_alignTop="@+id/backbutton"
+            android:layout_centerHorizontal="true" />
+
+        <com.wischase.view.CustomButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:id="@+id/nextbutton"
+            android:layout_alignTop="@+id/backbutton"
+            android:layout_alignRight="@+id/spinner"
+            android:layout_alignEnd="@+id/spinner" />
 
     </RelativeLayout>
 </RelativeLayout>

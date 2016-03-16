@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.wischase.R;
+import com.wischase.SubCategory;
 import com.wischase.view.menu.ScrollingActivity;
 
 public class Optionscreen extends ScrollingActivity {
@@ -29,7 +30,11 @@ public class Optionscreen extends ScrollingActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Upload a Question", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getBaseContext(), QuestionUpload.class));
+                Intent uploadfile = new Intent(getBaseContext(), QuestionUpload.class);
+                SubCategory subcategory = new SubCategory();
+                subcategory.getCategoryId();
+                uploadfile.putExtra(ActivityConstants.GRADE_INPUT,subcategory);
+                startActivity(uploadfile);
             }
         });
         /* function for onclick event of the imagebutton (uploading a file); onclick of the button leads to
@@ -39,7 +44,11 @@ public class Optionscreen extends ScrollingActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Upload a File/ A set of Questions", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(Optionscreen.this, QuestionUpload.class));
+                Intent upqus =new Intent(getBaseContext(),QuestionUpload.class);
+                SubCategory subcategory = new SubCategory();
+                subcategory.getCategoryId();
+                upqus.putExtra(ActivityConstants.GRADE_INPUT,subcategory);
+                startActivity(upqus);
             }
         });
         /* function for onclick event of the imagebutton (taking the test); onclick of the button leads to
@@ -49,7 +58,11 @@ public class Optionscreen extends ScrollingActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Take A Test", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(Optionscreen.this,TakeAQuiz.class ));
+                Intent  taketest = new Intent(getBaseContext(),TakeAQuiz.class);
+                SubCategory subcategory = new SubCategory();
+                subcategory.getCategoryId();
+                taketest.putExtra(ActivityConstants.GRADE_INPUT,subcategory);
+                startActivity(taketest);
             }
         });
     }
