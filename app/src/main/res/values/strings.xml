@@ -9,8 +9,11 @@
     <string name="user_Name">UserName :</string>
     <string name="logIn_SignUp">SignUp</string>
     <string name="logIn_SignIn">LogIn</string>
+    <string name="change_cat">Change Category</string>
+    <string name="nextQ">Next Question</string>
 
-        <string-array name="grade_array">
+
+    <string-array name="grade_array">
         <item>Pre-K</item>
         <item>Kindergarten</item>
         <item>Grade 1</item>
