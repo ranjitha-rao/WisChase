@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
+    android:columnCount="3">
+    <com.wischase.view.CustomTextView
+        android:textSize="12sp"
+        android:text="Subject"
+        android:textColor="@color/colorText"
+        android:layout_gravity="center_vertical" />
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorColumn"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginLeft="@dimen/text_margin"
+        />
+    <com.wischase.view.CustomTextView
+        android:textSize="16sp"
+        android:text="Geography"
+        android:textColor="@color/colorText"
+        android:id="@+id/subject"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        />
+
+
+
+    <TextView
+        android:layout_height="@dimen/rowLineHeight"
+        android:background="@color/colorColumn"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_gravity="fill_horizontal"
+         />
+
+
+
+    <com.wischase.view.CustomTextView
+        android:textSize="12sp"
+        android:text="Grade \nLevel"
+        android:textColor="@color/colorText"
+        android:layout_gravity="center_vertical" />
+    <TextView
+        android:layout_width="1dp"
+        android:background="@color/colorColumn"
+        android:layout_gravity="fill_vertical"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginLeft="@dimen/text_margin" />
+
+    <com.wischase.view.CustomTextView
+        android:textSize="16sp"
+        android:text="4"
+        android:textColor="@color/colorText"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_vertical"
+        android:id = "@+id/grade"/>
+
+
+    <TextView
+        android:layout_height="@dimen/rowLineHeight"
+        android:background="@color/colorColumn"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_gravity="fill_horizontal"
+         />
+
+
+
+    <com.wischase.view.CustomTextView
+        android:textSize="12sp"
+        android:text="Question"
+        android:textColor="@color/colorText"
+         />
+    <TextView
+        android:layout_width="1dp"
+        android:background="@color/colorColumn"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_gravity="fill_vertical"
+        />
+    <com.wischase.view.CustomTextView
+        android:textSize="16sp"
+        android:text="8 of 88"
+        android:textColor="@color/colorText"
+        android:id="@+id/questionNum"
+        />
+
+    <TextView
+        android:layout_height="@dimen/rowLineHeight"
+        android:background="@color/colorColumn"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_gravity="fill_horizontal"
+         />
+
+    <com.wischase.view.CustomTextView
+        android:textSize="12sp"
+        android:text="Current \nScore"
+        android:textColor="@color/colorText"
+        />
+    <TextView
+        android:layout_width="1dp"
+        android:background="@color/colorColumn"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_gravity="fill_vertical"
+        />
+    <com.wischase.view.CustomTextView
+        android:textSize="16sp"
+        android:text="8"
+        android:id="@+id/score"
+        android:textColor="@color/colorText"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_vertical" />
+
+
+    <TextView
+        android:layout_height="@dimen/rowLineHeight"
+        android:background="@color/colorColumn"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_gravity="fill_horizontal"
+         />
+
+
+    <com.wischase.view.CustomTextView
+        android:textSize="12sp"
+        android:text="Time \nElapsed"
+        android:padding="@dimen/textPadding"
+        android:textColor="@color/colorText"
+        />
+    <TextView
+        android:layout_width="1dp"
+        android:background="@color/colorColumn"
+        android:layout_gravity="fill_vertical"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginLeft="@dimen/text_margin"
+        />
+
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeElapsed"
+        android:layout_row="8"
+        android:layout_column="2"
+        android:textColor="@color/colorText"/>
+
+    <TextView
+        android:layout_height="@dimen/rowLineHeight"
+        android:background="@color/colorColumn"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_gravity="fill_horizontal"
+        />
+</GridLayout>
