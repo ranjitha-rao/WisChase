@@ -29,9 +29,9 @@ Question question;
         setContentView(R.layout.activity_answer_upload);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+   //Toast.makeText(getBaseContext(),q,Toast.LENGTH_LONG).show();
         Intent inputIntent = getIntent();
-        question = inputIntent.getParcelableExtra("question");
+        question = inputIntent.getParcelableExtra(ActivityConstants.QUESTIONS);
         /*       Question userInput = (Question)(inputIntent.writeToParcel(parcel));
         int gradeInput = inputIntent.getIntExtra(ActivityConstants.GRADE_INPUT,0);
         DBHandler dbHandle = new DBHandler(this);
@@ -97,7 +97,7 @@ Question question;
         {
             setContentView(R.layout.activity_explanation_upload);
             Intent intent=new Intent(this,ExplanationUpload.class);
-            intent.putExtra("answer",question );
+            intent.putExtra(ActivityConstants.QUESTIONS,question );
             startActivity(intent);
 
         }

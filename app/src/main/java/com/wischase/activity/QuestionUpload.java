@@ -10,19 +10,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.wischase.Question;
 import com.wischase.R;
 import com.wischase.view.menu.ScrollingActivity;
 
 public class QuestionUpload extends ScrollingActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_upload);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Toast.makeText(getBaseContext(),ActivityConstants.getInstance().getSubcategory(),Toast.LENGTH_LONG).show();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,8 +41,9 @@ public class QuestionUpload extends ScrollingActivity {
         setContentView(R.layout.activity_answer_upload);
          Intent intent=new Intent(this,AnswerUpload.class);
         Question upload=new Question();
+//        ac.setQuestionTrial(question_upload);
         upload.setQuestionText(question_upload);
-        intent.putExtra("question",upload );
+        intent.putExtra(ActivityConstants.QUESTIONS,upload );
         startActivity(intent);
     }
     public void backToOptionScreen(View view)

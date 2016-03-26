@@ -26,7 +26,7 @@ public class ExplanationUpload extends ScrollingActivity {
         setSupportActionBar(toolbar);
 
         Intent intent=getIntent();
-        question=intent.getParcelableExtra("answer");
+        question=intent.getParcelableExtra(ActivityConstants.QUESTIONS);
         String s=question.getQuestionText();
         Toast.makeText(getBaseContext(),s,Toast.LENGTH_LONG).show();
 
