@@ -10,8 +10,8 @@ import java.util.List;
  * Created by ranjitha on 12/12/2015.
  */
 public class Category implements Parcelable{
-    private String categoryName;
-    private List<SubCategory> subCategory;
+    public String categoryName;
+    private static List<SubCategory> subCategory;
 
     public Category()   {
 
@@ -19,7 +19,7 @@ public class Category implements Parcelable{
 
     public Category(String category, List<SubCategory> subCategory)  {
         this.categoryName = category;
-        this.subCategory = subCategory;
+        Category.subCategory = subCategory;
     }
 
     public Category(String categoryName, String subCategoryName, int categoryId)    {
@@ -35,7 +35,7 @@ public class Category implements Parcelable{
         this.categoryName = category;
     }
 
-    public List<SubCategory> getSubCategory() {
+    public static List<SubCategory> getSubCategory() {
         if(subCategory == null) {
             subCategory = new ArrayList<SubCategory>();
         }
@@ -43,14 +43,14 @@ public class Category implements Parcelable{
     }
 
     public void setSubCategory(List<SubCategory> subCategory) {
-        this.subCategory = subCategory;
+        Category.subCategory = subCategory;
     }
 
     public void add(String subCategory, int categoryId)    {
-        if(this.subCategory == null)    {
-            this.subCategory = new ArrayList<SubCategory>();
+        if(Category.subCategory == null)    {
+            Category.subCategory = new ArrayList<SubCategory>();
         }
-        this.subCategory.add(new SubCategory( subCategory,categoryId ));
+        Category.subCategory.add(new SubCategory(subCategory, categoryId));
     }
 
     @Override
@@ -77,5 +77,4 @@ public class Category implements Parcelable{
             return new Category[size];
         }
     };
-
 }

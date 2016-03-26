@@ -10,5 +10,5 @@
     <dimen name="textPadding">3dip</dimen>
     <dimen name="rowLineHeight">2dip</dimen>
     <dimen name="questionTextSize">20sp</dimen>
-    <dimen name ="welcomeTextSize">30sp</dimen>
+    <dimen name="welcomeTextSize">30sp</dimen>
 </resources>
