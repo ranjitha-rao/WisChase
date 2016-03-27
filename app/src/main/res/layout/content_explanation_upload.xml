@@ -17,7 +17,7 @@
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <include layout="@layout/content_category_table"
+        <include layout="@layout/categorytable"
             android:layout_width="wrap_content"
             android:layout_row="0"
             android:layout_height="150dp"
