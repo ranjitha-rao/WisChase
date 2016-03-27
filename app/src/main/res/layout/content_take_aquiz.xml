@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,300 +11,67 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.wischase.activity.TakeAQuiz"
     tools:showIn="@layout/activity_take_aquiz"
-    android:background="@color/colorBackground">
-    <TableRow>
+    android:background="@color/colorBackground"
+    android:rowCount="10"
+    android:columnCount="2">
 
-        <TableLayout>
-
-
-            <TableRow>
-
-                <com.wischase.view.CustomTextView
-                    android:layout_width="200dip"
-                    android:textSize="24sp"
-                    android:text="Capital \nCities"
-                    android:padding="6dip"
-                    android:textColor="@color/colorText"
-                    android:id="@+id/subCategory"/>
-
-            </TableRow>
-
-        </TableLayout>
-
-
-
-        <TableLayout>
-
-            <TableRow>
-
-                <com.wischase.view.CustomTextView
-                    android:textSize="12sp"
-                    android:text="Subject"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText" />
-
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="4dip"
-                    android:layout_marginRight="4dip"
-                    android:background="@color/colorColumn"
-                    />
+    <GridLayout
+        android:rowCount="1"
+        android:columnCount="2"
+        android:layout_row="0"
+        android:layout_width="match_parent"
+        android:layout_column="0">
+        <com.wischase.view.CustomTextView
+            android:textSize="24sp"
+            android:text="Capital \nCities"
+            android:textColor="@color/colorText"
+            android:id="@+id/subCategory"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_height="wrap_content" />
+        <include layout="@layout/quiz_score_board" android:layout_gravity="right" android:layout_width="wrap_content" android:layout_height = "wrap_content"/>
 
 
 
-                <com.wischase.view.CustomTextView
+    </GridLayout>
 
-                    android:textSize="16sp"
-                    android:text="Geography"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"
-                    android:id="@+id/subject"/>
-
-            </TableRow>
-            <View
-                android:layout_height="@dimen/rowLineHeight"
-                android:background="@color/colorColumn" />
-
-            <TableRow>
-                <com.wischase.view.CustomTextView
-                    android:textSize="12sp"
-                    android:text="Grade \nLevel"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"
-                    android:id="@+id/grade"/>
-
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="4dip"
-                    android:layout_marginRight="4dip"
-                    android:background="@color/colorColumn"
-                    />
-                <com.wischase.view.CustomTextView
-                    android:textSize="16sp"
-                    android:text="4"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"/>
-
-            </TableRow>
-            <View
-                android:layout_height="@dimen/rowLineHeight"
-                android:background="@color/colorColumn" />
-
-            <TableRow>
-                <com.wischase.view.CustomTextView
-                    android:textSize="12sp"
-                    android:text="Question"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"
-                    />
-
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="4dip"
-                    android:layout_marginRight="4dip"
-                    android:background="@color/colorColumn"
-                    />
-
-                <com.wischase.view.CustomTextView
-                    android:textSize="16sp"
-                    android:text="8 of 88"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"
-                    android:id="@+id/questionNum"/>
-
-            </TableRow>
-            <View
-                android:layout_height="@dimen/rowLineHeight"
-                android:background="@color/colorColumn" />
-
-            <TableRow>
-
-                <com.wischase.view.CustomTextView
-                    android:textSize="12sp"
-                    android:text="Current \nScore"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"
-                    android:drawableRight="#f6fcf7f7" />
-
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="4dip"
-                    android:layout_marginRight="4dip"
-                    android:background="@color/colorColumn"
-                    />
-
-                <com.wischase.view.CustomTextView
-                    android:textSize="16sp"
-                    android:text="8"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"/>
-
-            </TableRow>
-            <View
-                android:layout_height="@dimen/rowLineHeight"
-                android:background="@color/colorColumn" />
-
-            <TableRow>
-                <com.wischase.view.CustomTextView
-                    android:textSize="12sp"
-                    android:text="Time \nElapsed"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"/>
-
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="4dip"
-                    android:layout_marginRight="4dip"
-                    android:background="@color/colorColumn"
-                    />
-                <com.wischase.view.CustomTextView
-                    android:textSize="16sp"
-                    android:text="15:20"
-                    android:padding="@dimen/textPadding"
-                    android:textColor="@color/colorText"
-                    android:id="@+id/timeElapsed"/>
-
-            </TableRow>
-
-        </TableLayout>
-
-    </TableRow>
-
-    <!-- Row 2 with 3 columns -->
-    <TableRow android:id="@+id/questionRow">
-
+    <GridLayout
+        android:layout_row="5"
+        android:layout_column="0">
         <com.wischase.view.CustomTextView
             android:id="@+id/questionText"
             android:text="What is the capital of Germany?"
             android:textColor="@color/colorText"
-            android:layout_span="2"
             android:padding="20dip"
             android:textSize="@dimen/questionTextSize"
-            android:layout_gravity="bottom"/>
-    </TableRow>
+            android:layout_gravity="top|bottom"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
+        <RadioGroup android:layout_row="1" android:layout_column="0" android:layout_margin="@dimen/text_margin"
+            android:id="@+id/answerOption">
+            <include layout="@layout/options_layout" />
+        </RadioGroup>
+     </GridLayout>
 
-    <TableRow>
-
-        <TableLayout android:layout_span="2">
-
-            <!-- Row 3 with 2 columns -->
-
-            <TableRow android:layout_span="2">
-
-                <com.wischase.view.CustomTextView
-                    android:layout_width="60dip"
-                    android:text=""
-                    android:textSize="16dp"
-                    android:textColor="@color/colorText"
-                    android:padding="16dip"/>
-
-                <com.wischase.view.CustomTextView
-                    android:layout_width="60dip"
-                    android:text="#1"
-                    android:textSize="@dimen/questionTextSize"
-                    android:textColor="@color/colorText"
-                    android:padding="12dip"/>
-
-                <!-- Row 3 with 2 columns -->
-                <com.wischase.view.CustomTextView
-                    android:layout_width="260dip"
-                    android:text="Multiple Choice / Option 1"
-                    android:textSize="16dp"
-                    android:textColor="@color/colorText"
-                    android:padding="@dimen/textPadding"
-                    android:id="@+id/optionOneText"/>
-
-            </TableRow>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_column="0"
+        android:layout_height="wrap_content">
 
 
-            <TableRow android:layout_span="2">
+        <com.wischase.view.CustomButton
+            android:layout_row="0"
+            android:layout_column="0"
+            android:text="@string/change_cat"
+            android:textStyle="bold"
+            android:onClick="changeCategory" />
+        <com.wischase.view.CustomButton
+            android:layout_row="0"
+            android:layout_column="1"
+            android:text="@string/nextQ"
+            android:textStyle="bold"
+            android:onClick="nextQuestion" />
+    </GridLayout>
 
-                <com.wischase.view.CustomTextView
-                    android:layout_width="60dip"
-                    android:text=""
-                    android:textSize="16dp"
-                    android:textColor="@color/colorText"
-                    android:padding="16dip"/>
-
-                <com.wischase.view.CustomTextView
-                    android:layout_width="60dip"
-                    android:text="#1"
-                    android:textSize="@dimen/questionTextSize"
-                    android:textColor="@color/colorText"
-                    android:padding="12dip"/>
-
-                <!-- Row 3 with 2 columns -->
-                <com.wischase.view.CustomTextView
-                    android:layout_width="260dip"
-                    android:text="Multiple Choice / Option 2"
-                    android:textSize="16dp"
-                    android:textColor="@color/colorText"
-                    android:padding="@dimen/textPadding"
-                    android:id="@+id/optionTwoText"/>
-            </TableRow>
-
-            <TableRow android:layout_span="2">
-
-                <com.wischase.view.CustomTextView
-                    android:layout_width="60dip"
-                    android:text=""
-                    android:textSize="16dp"
-                    android:textColor="@color/colorText"
-                    android:padding="16dip"/>
-
-                <com.wischase.view.CustomTextView
-                    android:layout_width="60dip"
-                    android:text="#1"
-                    android:textSize="@dimen/questionTextSize"
-                    android:textColor="@color/colorText"
-                    android:padding="12dip"/>
-
-                <!-- Row 3 with 2 columns -->
-                <com.wischase.view.CustomTextView
-                    android:layout_width="260dip"
-                    android:text="Multiple Choice / Option 3"
-                    android:textSize="16dp"
-                    android:textColor="@color/colorText"
-                    android:padding="@dimen/textPadding"
-                    android:id="@+id/optionThreeText"/>
-
-            </TableRow>
-
-            <TableRow android:layout_span="2">
-
-                <com.wischase.view.CustomTextView
-                    android:layout_width="60dip"
-                    android:text=""
-                    android:textSize="16dp"
-                    android:textColor="@color/colorText"
-                    android:padding="16dip"/>
-
-                <com.wischase.view.CustomTextView
-                    android:layout_width="60dip"
-                    android:text="#1"
-                    android:textSize="@dimen/questionTextSize"
-                    android:textColor="@color/colorText"
-                    android:padding="12dip"/>
-
-                <!-- Row 3 with 2 columns -->
-                <com.wischase.view.CustomTextView
-                    android:layout_width="260dip"
-                    android:text="Multiple Choice / Option 4"
-                    android:textSize="16dp"
-                    android:textColor="@color/colorText"
-                    android:padding="@dimen/textPadding"
-                    android:id="@+id/optionFourText"/>
-            </TableRow>
-
-
-
-        </TableLayout>
-
-    </TableRow>
-
-</TableLayout>
+</GridLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/optionOneRadio"
+            android:text="1"
+            android:layout_column="0"
+            android:layout_row="0"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/optionTwoRadio"
+            android:text="2"
+            android:layout_column="0"
+            android:layout_row="1"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/optionThreeRadio"
+            android:text="3"
+            android:layout_column="0"
+            android:layout_row="2"
+
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/optionFourRadio"
+            android:text="4"
+            android:layout_column="0"
+            android:layout_row="3"
+            />
+
+
+    <com.wischase.view.CustomTextView
+        android:text="Multiple Choice / Option 1"
+        android:textSize="16dp"
+        android:textColor="@color/colorText"
+        android:padding="@dimen/textPadding"
+        android:id="@+id/optionOneText"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:labelFor="@id/optionOneRadio"
+        android:layout_column="1"
+        android:layout_row="0"
+
+        />
+    <com.wischase.view.CustomTextView
+        android:text="Multiple Choice / Option 2"
+        android:textSize="16dp"
+        android:textColor="@color/colorText"
+        android:padding="@dimen/textPadding"
+        android:id="@+id/optionTwoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/optionTwoRadio"
+        android:layout_column="1"
+        android:layout_row="1"
+        />
+    <com.wischase.view.CustomTextView
+        android:text="Multiple Choice / Option 3"
+        android:textSize="16dp"
+        android:textColor="@color/colorText"
+        android:padding="@dimen/textPadding"
+        android:id="@+id/optionThreeText"
+        android:layout_row="2"
+        android:layout_column="1"
+        />
+    <com.wischase.view.CustomTextView
+        android:text="Multiple Choice / Option 4"
+        android:textSize="16dp"
+        android:textColor="@color/colorText"
+        android:padding="@dimen/textPadding"
+        android:id="@+id/optionFourText"
+        android:layout_row="3"
+        android:layout_column="1"
+        />
+
+</GridLayout>

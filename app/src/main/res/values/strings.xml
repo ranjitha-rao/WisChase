@@ -5,6 +5,8 @@
     <string name="action_upload_question_bank">Upload questions from a file</string>
     <string name="action_exit">Exit</string>
     <string name="title_activity_take_aquiz">TakeAQuiz</string>
+    <string name="change_cat">Change Category</string>
+    <string name="nextQ">Next Question</string>
     <string name="title_activity_selectionscreen">Selectionscreen</string>
     <string name="title_activity_optionscreen">Optionscreen</string>
     <string name="title_activity_addcategory">Addcategory</string>
@@ -15,7 +17,7 @@
     <string name="logIn_SignIn">logIn_SignIn</string>
     <string name="title_activity_explanation_upload">ExplanationUpload</string>
     <string name="title_activity_answer_upload">title_activity_answer_upload</string>
-
+    <string name="title_activity_upload_afile">UploadAFile</string>
 
     <string-array name="grade_array">
         <item>Select Grade</item>
@@ -32,5 +34,4 @@
         <item>Grade 9</item>
         <item>Grade 10</item>
     </string-array>
-
 </resources>
