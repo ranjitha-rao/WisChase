@@ -21,8 +21,10 @@ import com.wischase.view.menu.ScrollingActivity;
 
 import java.util.List;
 
-public class AnswerUpload extends ScrollingActivity {
+public class AnswerUpload extends UpdateTable {
 Question question;
+    int grade;
+    Category userInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +34,9 @@ Question question;
    //Toast.makeText(getBaseContext(),q,Toast.LENGTH_LONG).show();
         Intent inputIntent = getIntent();
         question = inputIntent.getParcelableExtra(ActivityConstants.QUESTIONS);
-        /*       Question userInput = (Question)(inputIntent.writeToParcel(parcel));
-        int gradeInput = inputIntent.getIntExtra(ActivityConstants.GRADE_INPUT,0);
-        DBHandler dbHandle = new DBHandler(this);
-        int categoryIdInput = userInput.getSubCategory().get(0).getCategoryId();
-        questionList = dbHandle.getAllQuestions(categoryIdInput, gradeInput);
-*/
+        userInput=(Category)(inputIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
+        grade=inputIntent.getIntExtra(ActivityConstants.GRADE_INPUT,0);
+        super.updateCategoryTable(userInput, grade);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +97,8 @@ Question question;
             setContentView(R.layout.activity_explanation_upload);
             Intent intent=new Intent(this,ExplanationUpload.class);
             intent.putExtra(ActivityConstants.QUESTIONS,question );
+            intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
+            intent.putExtra(ActivityConstants.USER_INPUT,userInput);
             startActivity(intent);
 
         }

@@ -74,7 +74,7 @@
      {
        "questionId": "7",
        "questionText": "Scientists ------ when they draw conclusions.",
-       "optionOne" : "technology,
+       "optionOne" : "technology",
        "optionTwo" : "infer",
        "optionThree" : "observe",
        "optionFour"  : "inquiry",

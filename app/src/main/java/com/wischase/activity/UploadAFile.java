@@ -2,6 +2,7 @@ package com.wischase.activity;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.wischase.Category;
 import com.wischase.R;
 import com.wischase.view.menu.ScrollingActivity;
 
@@ -24,7 +26,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 
-public class UploadAFile extends ScrollingActivity {
+public class UploadAFile extends UpdateTable {
+    Category userInput;
+    int grade;
+    int categoryIdInput;
     private File dir;
     boolean mExternalStorageAvailable = false;
     boolean mExternalStorageWriteable = false;
@@ -35,6 +40,11 @@ public class UploadAFile extends ScrollingActivity {
         setContentView(R.layout.activity_upload_afile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Intent intent=getIntent();
+        userInput=(Category)(intent.getParcelableExtra(ActivityConstants.USER_INPUT));
+        grade=intent.getIntExtra(ActivityConstants.GRADE_INPUT,0);
+        super.updateCategoryTable(userInput, grade);
+        categoryIdInput= userInput.getSubCategory().get(0).getCategoryId();
 
          /*  SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView=null;

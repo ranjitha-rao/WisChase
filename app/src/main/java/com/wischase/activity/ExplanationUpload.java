@@ -11,13 +11,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.wischase.Category;
 import com.wischase.Question;
 import com.wischase.R;
 import com.wischase.db.DBHandler;
 import com.wischase.view.menu.ScrollingActivity;
 
-public class ExplanationUpload extends ScrollingActivity {
+public class ExplanationUpload extends UpdateTable {
     Question question;
+    Category userInput;
+    int grade;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +30,11 @@ public class ExplanationUpload extends ScrollingActivity {
 
         Intent intent=getIntent();
         question=intent.getParcelableExtra(ActivityConstants.QUESTIONS);
-        String s=question.getQuestionText();
-        Toast.makeText(getBaseContext(),s,Toast.LENGTH_LONG).show();
+        //String s=question.getQuestionText();
+        //Toast.makeText(getBaseContext(),s,Toast.LENGTH_LONG).show();
+        userInput=(Category)(intent.getParcelableExtra(ActivityConstants.USER_INPUT));
+        grade=intent.getIntExtra(ActivityConstants.GRADE_INPUT, 0);
+        super.updateCategoryTable(userInput, grade);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
