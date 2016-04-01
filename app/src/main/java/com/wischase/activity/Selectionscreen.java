@@ -29,7 +29,7 @@ public class Selectionscreen extends ScrollingActivity implements AdapterView.On
     Map<String, Category> categorylist;
     List<SubCategory> subcategorylist;
     Button nextbutton, addcategorybutton;
-    List<SubCategory> sublist;
+    SubCategory sublist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class Selectionscreen extends ScrollingActivity implements AdapterView.On
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    System.out.println("Select a Grade Level");
+                    System.out.print("Select a Grade Level");
                 } else
                     Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " Selected", Toast.LENGTH_SHORT).show();
             }
@@ -88,12 +88,11 @@ public class Selectionscreen extends ScrollingActivity implements AdapterView.On
             e.printStackTrace();
         }
     categorydd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String categoryNameSelected = parent.getItemAtPosition(position).toString();
+        public void onItemSelected(AdapterView<?> parent, View selectedItemview, int position, long id) {
+            String categoryNameSelected = categorydd.getSelectedItem().toString();
             Toast.makeText(getBaseContext(), categoryNameSelected + " Selected ", Toast.LENGTH_SHORT).show();
             subcategorydd = (Spinner) findViewById(R.id.subcategory_spinner);
-            subcategorylist = categorylist.get(categoryNameSelected).getSubCategory();
-         //   sublist =subcategorylist.subList(position,10);
+                subcategorylist = categorylist.get(categoryNameSelected).getSubCategory();
             updateSubcategory();
         }
         @Override
@@ -103,7 +102,7 @@ public class Selectionscreen extends ScrollingActivity implements AdapterView.On
     }
    private void updateSubcategory() {
        ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item);
-        adapter.addAll(String.valueOf(sublist));
+        adapter.addAll(String.valueOf(subcategorylist));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subcategorydd.setAdapter(adapter);
                 subcategorydd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
