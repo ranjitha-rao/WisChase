@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Category implements Parcelable{
     public String categoryName;
-    private static List<SubCategory> subCategory;
+    private List<SubCategory> subCategory;
 
     public Category()   {
 
@@ -19,7 +19,7 @@ public class Category implements Parcelable{
 
     public Category(String category, List<SubCategory> subCategory)  {
         this.categoryName = category;
-        Category.subCategory = subCategory;
+        subCategory = subCategory;
     }
 
     public Category(String categoryName, String subCategoryName, int categoryId)    {
@@ -35,22 +35,22 @@ public class Category implements Parcelable{
         this.categoryName = category;
     }
 
-    public static List<SubCategory> getSubCategory() {
-        if(subCategory == null) {
-            subCategory = new ArrayList<SubCategory>();
+    public List<SubCategory> getSubCategory() {
+        if(this.subCategory == null) {
+            this.subCategory = new ArrayList<SubCategory>();
         }
         return subCategory;
     }
 
     public void setSubCategory(List<SubCategory> subCategory) {
-        Category.subCategory = subCategory;
+        subCategory = subCategory;
     }
 
-    public void add(String subCategory, int categoryId)    {
-        if(Category.subCategory == null)    {
-            Category.subCategory = new ArrayList<SubCategory>();
+    public void add(String subCategoryString, int categoryId)    {
+        if(this.subCategory == null)    {
+            this.subCategory = new ArrayList<SubCategory>();
         }
-        Category.subCategory.add(new SubCategory(subCategory, categoryId));
+        subCategory.add(new SubCategory(subCategoryString, categoryId));
     }
 
     @Override
