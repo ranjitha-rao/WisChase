@@ -89,10 +89,11 @@ public class Selectionscreen extends ScrollingActivity implements AdapterView.On
         }
     categorydd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " Selected ", Toast.LENGTH_SHORT).show();
+            String categoryNameSelected = parent.getItemAtPosition(position).toString();
+            Toast.makeText(getBaseContext(), categoryNameSelected + " Selected ", Toast.LENGTH_SHORT).show();
             subcategorydd = (Spinner) findViewById(R.id.subcategory_spinner);
-            subcategorylist = Category.getSubCategory();
-            sublist =subcategorylist.subList(position,10);
+            subcategorylist = categorylist.get(categoryNameSelected).getSubCategory();
+         //   sublist =subcategorylist.subList(position,10);
             updateSubcategory();
         }
         @Override
