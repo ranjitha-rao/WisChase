@@ -11,10 +11,10 @@
     <string name="title_activity_optionscreen">Optionscreen</string>
     <string name="title_activity_addcategory">Addcategory</string>
     <string name="title_activity_questionupload">QuestionUpload</string>
-    <string name="welcome_Msg">Welcome_Msg</string>
-    <string name="user_Name">user_Name</string>
-    <string name="logIn_SignUp">logIn_SignUp</string>
-    <string name="logIn_SignIn">logIn_SignIn</string>
+    <string name="title_activity_loginscreen">LogInScreen</string>
+    <string name="Welcome_Msg">Welcome to QuizWhiz</string>
+    <string name="user_Name">User Name :</string>
+    <string name="logIn_SignUp">Sign In</string>
     <string name="title_activity_explanation_upload">ExplanationUpload</string>
     <string name="title_activity_answer_upload">title_activity_answer_upload</string>
     <string name="title_activity_upload_afile">UploadAFile</string>
