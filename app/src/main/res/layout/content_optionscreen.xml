@@ -13,7 +13,7 @@
     tools:showIn="@layout/activity_optionscreen"
     android:background="#171515">
 
-    <RelativeLayout
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
@@ -25,47 +25,54 @@
             android:text="What would you like to do?"
             android:id="@+id/textView3"
             android:textSize="20dp"
-            android:textColor="#fefdfd"
+            android:textColor="@color/colorText"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="53dp" />
+            android:layout_marginTop="53dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:onClick=""/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp"
-            android:layout_below="@+id/textView3"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+        <ImageButton
+            android:layout_width="128dp"
+            android:layout_height="120dp"
+            android:id="@+id/imgbutupq"
+            android:src="@mipmap/uploadquestion"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:onClick="uploadques"
+            android:layout_gravity="left|top"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_columnSpan="3"/>
 
-            <ImageButton
-                android:layout_width="151dp"
-                android:layout_height="126dp"
-                android:id="@+id/imgbutupfile"
-                android:src="@mipmap/uploadfile"
-                android:layout_gravity="left|top"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:nestedScrollingEnabled="true" />
+        <ImageButton
+            android:layout_width="128dp"
+            android:layout_height="120dp"
+            android:id="@+id/imgbutupfile"
+            android:src="@mipmap/uploadfile"
+            android:layout_gravity="left|top"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:onClick="uploadfile"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_columnSpan="3"/>
 
-            <ImageButton
-                android:layout_width="154dp"
-                android:layout_height="128dp"
-                android:id="@+id/imgbutupq"
-                android:src="@mipmap/uploadquestion"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:layout_gravity="right|top" />
-
-            <ImageButton
-                android:layout_width="154dp"
-                android:layout_height="129dp"
+        <ImageButton
+                android:layout_width="128dp"
+                android:layout_height="120dp"
                 android:id="@+id/imgbuttest"
                 android:src="@mipmap/take_test"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:layout_gravity="left|center_vertical" />
-        </FrameLayout>
-    </RelativeLayout>
+                android:onClick="taketest"
+                android:layout_gravity="left|top"
+                android:layout_row="2"
+                android:layout_column="0" />
+
+
+    </GridLayout>
 </RelativeLayout>
