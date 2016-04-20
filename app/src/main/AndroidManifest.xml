@@ -31,7 +31,7 @@
             android:theme="@style/AppTheme" > </activity>
         <activity
             android:name=".activity.LogInScreen"
-            android:label="@string/title_activity_take_aquiz"
+            android:label="@string/title_activity_loginscreen"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

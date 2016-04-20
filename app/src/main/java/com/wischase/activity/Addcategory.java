@@ -1,5 +1,6 @@
 package com.wischase.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,16 +20,22 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-public class Addcategory extends ScrollingActivity implements AdapterView.OnItemSelectedListener{
+public class Addcategory extends Activity {
 Spinner categoryspinner;
     Map<String,Category>categorylist;
-Button nextbutton,submitbutton,backbutton;
-EditText category,subcategory;
+    EditText category,subcategory;
+    int gradeinput,categoryinput;
+    Category userinput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addcategory);
-        categoryspinner=(Spinner)findViewById(R.id.spinner);
+        Intent inputintent = getIntent();
+        gradeinput = inputintent.getIntExtra(ActivityConstants.GRADE_INPUT, 0);
+        userinput =(Category)(inputintent.getParcelableExtra(ActivityConstants.USER_INPUT));
+      //  categoryinput =userinput.getSubCategory().get(0).getCategoryId();
+        categoryspinner = (Spinner) findViewById(R.id.spinner);
         DBHandler db = new DBHandler(getApplicationContext());
         try {
             categorylist = db.getAllCategories();
@@ -37,45 +44,29 @@ EditText category,subcategory;
             dataadapter.addAll(list);
             dataadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             categoryspinner.setAdapter(dataadapter);
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " Selected ", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        nextbutton=(Button)findViewById(R.id.nextbutton);
-        nextbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent next= new Intent(getBaseContext(),Optionscreen.class);
-                startActivity(next);
-            }
-        });
-        backbutton=(Button)findViewById(R.id.backbutton);
-        backbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent back= new Intent(getBaseContext(),Selectionscreen.class);
-                startActivity(back);
-            }
-        });
-        submitbutton=(Button)findViewById(R.id.submitbutton);
-        category=(EditText)findViewById(R.id.editText);
-        String catname =getBaseContext().toString();
-        subcategory=(EditText)findViewById(R.id.editText2);
-        String subcname =getBaseContext().toString();
-        DBHandler dbhandle =new DBHandler(getApplicationContext());
-        long submit =dbhandle.insertUserAddedCatInfo(catname,subcname);
-}
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
     }
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+        public void nextscreen (View v){
+            Intent nextintent = new Intent(getBaseContext(),Optionscreen.class);
+            startActivity(nextintent);
     }
-}
+        public void submit(View v) {
+            category=(EditText)findViewById(R.id.editText);
+            String categoryname =getBaseContext().toString();
+            subcategory=(EditText)findViewById(R.id.editText2);
+            String subcategoryname =getBaseContext().toString();
+            DBHandler dbhandle =new DBHandler(getApplicationContext());
+            long newlyadded =dbhandle.insertUserAddedCatInfo(categoryname,subcategoryname);
+            Toast.makeText(getBaseContext(),newlyadded+"added",Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.activity_addcategory);
+        }
+   }

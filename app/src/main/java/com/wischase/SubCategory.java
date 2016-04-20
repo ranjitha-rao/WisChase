@@ -57,4 +57,9 @@ public class SubCategory implements Parcelable{
             return new SubCategory[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return subCategory;
+    }
 }

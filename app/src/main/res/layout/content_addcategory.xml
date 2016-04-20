@@ -11,42 +11,39 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.wischase.activity.Addcategory"
     tools:showIn="@layout/activity_addcategory"
-    android:background="#171515">
+    android:background="@color/colorBackground">
 
-    <RelativeLayout
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true">
 
         <com.wischase.view.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Category: "
             android:textSize="20dp"
-            android:textColor="#fefdfd"
+            android:textColor="@color/colorText"
             android:id="@+id/textView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="39dp" />
+            android:layout_marginTop="53dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
 
         <Spinner
-            android:layout_width="@dimen/fontsize"
-            android:layout_height="@dimen/text_margin"
+            android:layout_width="444dp"
+            android:layout_height="wrap_content"
             android:id="@+id/spinner"
             android:layout_alignBottom="@+id/textView"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/textView"
-            android:layout_toRightOf="@+id/textView"
-            android:layout_toEndOf="@+id/textView"
             android:visibility="visible"
             android:spinnerMode="dropdown"
             android:clickable="true"
             android:contextClickable="true"
-            android:background="#ffffff" />
+            android:background="#ffffff"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
 
         <com.wischase.view.CustomTextView
             android:layout_width="wrap_content"
@@ -55,73 +52,64 @@
             android:textSize="20dp"
             android:textColor="#fefdfd"
             android:id="@+id/textView2"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="41dp" />
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:background="#ffffff"
+            android:editable="true"
+            android:inputType="text"
+            android:textColor="@color/colorBackground"
+            android:visibility="visible"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
 
         <com.wischase.view.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add New Sub-Category: "
             android:textSize="20dp"
-            android:textColor="#fefdfd"
+            android:textColor="@color/colorText"
             android:id="@+id/textView7"
-            android:layout_below="@+id/editText"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_below="@+id/textView2"
-            android:layout_toRightOf="@+id/textView2"
-            android:layout_alignRight="@+id/spinner"
-            android:layout_alignEnd="@+id/spinner"
-            android:background="#ffffff"
-            android:editable="true"
-            android:inputType="text"
-            android:visibility="visible" />
+            android:layout_column="0"
+            android:layout_row="4"
+            android:layout_columnSpan="2"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText2"
-            android:layout_below="@+id/textView7"
-            android:layout_alignLeft="@+id/editText"
-            android:layout_alignStart="@+id/editText"
-            android:layout_alignRight="@+id/spinner"
-            android:layout_alignEnd="@+id/spinner"
             android:background="#ffffff"
+            android:editable="true"
             android:visibility="visible"
-            android:inputType="text" />
-
-        <com.wischase.view.CustomButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:id="@+id/backbutton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:inputType="text"
+            android:textColor="@color/colorBackground"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
 
         <com.wischase.view.CustomButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
             android:id="@+id/submitbutton"
-            android:layout_alignTop="@+id/backbutton"
-            android:layout_centerHorizontal="true" />
+            android:layout_row="6"
+            android:layout_column="0"
+            android:onClick="submit"/>
 
         <com.wischase.view.CustomButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Next"
             android:id="@+id/nextbutton"
-            android:layout_alignTop="@+id/backbutton"
-            android:layout_alignRight="@+id/spinner"
-            android:layout_alignEnd="@+id/spinner" />
+            android:layout_row="6"
+            android:layout_column="1"
+            android:onClick="nextscreen"/>
 
-    </RelativeLayout>
+    </GridLayout>
 </RelativeLayout>
