@@ -25,7 +25,7 @@
             android:textSize="24sp"
             android:text="Capital \nCities"
             android:textColor="@color/colorText"
-            android:id="@+id/subCategory"
+            android:id="@+id/subCategoryTQHeading"
             android:layout_row="0"
             android:layout_column="0"
             android:layout_height="wrap_content" />
@@ -48,11 +48,8 @@
             android:layout_row="0"
             android:layout_column="0"
             android:layout_columnSpan="2"/>
-        <RadioGroup android:layout_row="1" android:layout_column="0" android:layout_margin="@dimen/text_margin"
-            android:id="@+id/answerOption">
-            <include layout="@layout/options_layout" />
-        </RadioGroup>
-     </GridLayout>
+
+    </GridLayout>
 
     <GridLayout
         android:layout_width="match_parent"
@@ -61,17 +58,30 @@
 
 
         <com.wischase.view.CustomButton
-            android:layout_row="0"
+            android:layout_row="2"
             android:layout_column="0"
             android:text="@string/change_cat"
             android:textStyle="bold"
             android:onClick="changeCategory" />
+
+        <include layout="@layout/options_layout" android:layout_row="1" android:layout_column="0"
+            android:layout_height="wrap_content" android:layout_width="wrap_content"
+             />
+
         <com.wischase.view.CustomButton
-            android:layout_row="0"
+            android:layout_row="2"
             android:layout_column="1"
             android:text="@string/nextQ"
             android:textStyle="bold"
-            android:onClick="nextQuestion" />
+            android:onClick="nextQuestion"
+            android:id="@+id/nextbutton"/>
     </GridLayout>
-
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/snackbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        >
+    </android.support.design.widget.CoordinatorLayout>
 </GridLayout>
