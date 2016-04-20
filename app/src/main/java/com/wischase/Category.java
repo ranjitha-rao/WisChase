@@ -77,4 +77,11 @@ public class Category implements Parcelable{
             return new Category[size];
         }
     };
+
+    public void add(SubCategory subCategory) {
+        if(this.subCategory ==  null)   {
+            this.subCategory = new ArrayList<SubCategory>();
+        }
+        this.subCategory.add(subCategory);
+    }
 }
