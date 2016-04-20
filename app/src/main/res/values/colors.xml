@@ -6,5 +6,7 @@
     <color name="colorBackground">#000000</color>
     <color name="colorText">#ffffff</color>
     <color name="colorColumn">#FF909090</color>
-
+    <color name="correctAnswer">#92D050</color>
+    <color name="wrongAnswer">#C00000</color>
+    <color name="pageHeading">#FFC000</color>
 </resources>
