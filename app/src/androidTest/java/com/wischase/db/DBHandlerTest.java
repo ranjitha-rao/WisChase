@@ -66,7 +66,7 @@ public class DBHandlerTest extends AndroidTestCase
     }
 
     public void testgetAllQuestions() throws Exception {
-        List<Question> questionList = db.getAllQuestions(10, 2);
+        List<Question> questionList = db.getAllQuestions(10, 2, 0);
         assertTrue(questionList.size() > 0);
 
     }

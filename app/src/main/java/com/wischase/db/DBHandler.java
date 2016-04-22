@@ -236,10 +236,10 @@ public void insertSampleQuestions(SQLiteDatabase db)  {
      * @param grade
      * @return
      */
-    public List<Question> getAllQuestions ( int categoryId, int grade)  {
+    public List<Question> getAllQuestions ( int categoryId, int grade, int offset)  {
         SQLiteDatabase qDb = this.getReadableDatabase();
         String[] columnQuestion = {CreateTables.KEY_QUESTIONID,CreateTables.KEY_QUESTION,CreateTables.KEY_OPTIONONE,CreateTables.KEY_OPTIONTWO, CreateTables.KEY_OPTIONTHREE, CreateTables.KEY_OPTIONFOUR, CreateTables.KEY_CORRECTANSWER, CreateTables.KEY_EXPLANATION, CreateTables.KEY_USER_ID};
-        Cursor questionCursor = qDb.query(CreateTables.TABLE_QUESTION, columnQuestion, CreateTables.KEY_ID + " = " + categoryId + " and " + CreateTables.KEY_GRADE + "=" + grade, null, null, null, null);
+        Cursor questionCursor = qDb.query(CreateTables.TABLE_QUESTION, columnQuestion, CreateTables.KEY_ID + " = " + categoryId + " and " + CreateTables.KEY_GRADE + "=" + grade, null, null, null, CreateTables.KEY_QUESTIONID, String.valueOf(offset)+",3");
         List<Question> questionList = cursorToQuestion(questionCursor, categoryId, grade);
 
                 qDb.close();
