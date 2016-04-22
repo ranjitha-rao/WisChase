@@ -34,4 +34,10 @@
         <item>Grade 9</item>
         <item>Grade 10</item>
     </string-array>
+
+
+    <string name="congrats">Congratulations!</string>
+    <string name="scoreString">You scored</string>
+    <string name="quizWhiz">You are a</string>
+    <string name="title_activity_quiz_results">QuizResults</string>
 </resources>
