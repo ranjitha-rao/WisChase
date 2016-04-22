@@ -27,7 +27,7 @@ public class Optionscreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_optionscreen);
         Intent inputintent = getIntent();
-        gradeinput = inputintent.getIntExtra(ActivityConstants.GRADE_INPUT, 0);
+        gradeinput = (int) inputintent.getLongExtra(ActivityConstants.GRADE_INPUT, 0);
         userinput =(Category)(inputintent.getParcelableExtra(ActivityConstants.USER_INPUT));
         //categoryinput =userinput.getSubCategory().get(0).getCategoryId();
          }
