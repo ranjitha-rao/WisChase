@@ -2,10 +2,13 @@ package com.wischase.view;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-    public class CustomTextView extends TextView {
+import com.wischase.R;
+
+public class CustomTextView extends TextView {
         public CustomTextView(Context context) {
             super(context);
             setFont();
@@ -22,5 +25,6 @@ import android.widget.TextView;
         private void setFont() {
             Typeface font = Typeface.createFromAsset(getContext().getAssets(), "font/Linds.ttf");
             setTypeface(font, Typeface.NORMAL);
+            setTextColor(ContextCompat.getColor(getContext(), R.color.colorText));
         }
     }
