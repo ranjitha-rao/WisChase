@@ -47,9 +47,14 @@
             android:name=".activity.ExplanationUpload"
             android:label="@string/title_activity_explanation_upload"
             android:theme="@style/AppTheme"> </activity>
-                <activity
+        <activity
             android:name=".activity.UploadAFile"
             android:label="@string/title_activity_upload_afile"
             android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".activity.QuizResults"
+            android:label="@string/title_activity_quiz_results"
+            android:theme="@style/AppTheme" >
+        </activity>
        </application>
 </manifest>
