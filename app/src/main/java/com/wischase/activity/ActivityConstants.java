@@ -7,6 +7,13 @@ public class ActivityConstants {
     public static final String USER_INPUT = "userInput";
     public static final String GRADE_INPUT = "gradeInput";
     public static final String QUESTIONS = "questions";
+    public static final String QUIZAGAIN = "offset";
+    public static final String OUTOF = "out of";
+    public static final String QUIZRESULTS = "quizResults";
+    public static final String RIGHT_ANSWER = "Right Answer";
+    public static final String WRONG_ANSWER = "Wrong Answer";
+
+
 
     /* private String CATEGORY,SUBCATEGORY;
     private long USERID;
