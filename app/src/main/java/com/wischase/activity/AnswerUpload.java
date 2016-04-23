@@ -87,14 +87,19 @@ Question question;
             question.writeToParcel(questionParcel,0);
             DBHandler dbHandler=new DBHandler(this);
            long i= dbHandler.insertQuestion(question);
-            Toast.makeText(getBaseContext(),"successful",Toast.LENGTH_LONG).show();
+            dbHandler.close();
+          //  Toast.makeText(getBaseContext(),"successful",Toast.LENGTH_LONG).show();
+            Intent intent=new Intent(this,UploadAnother.class);
+            intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
+            intent.putExtra(ActivityConstants.USER_INPUT, userInput);
+            startActivity(intent);
+
         }
     }
     public void nextExplanation(View view)
     {
         if((validatingAnswer(view))==0)
         {
-            setContentView(R.layout.activity_explanation_upload);
             Intent intent=new Intent(this,ExplanationUpload.class);
             intent.putExtra(ActivityConstants.QUESTIONS,question );
             intent.putExtra(ActivityConstants.GRADE_INPUT, grade);

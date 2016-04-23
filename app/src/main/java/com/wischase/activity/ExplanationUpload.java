@@ -56,6 +56,11 @@ public class ExplanationUpload extends UpdateTable {
         question.writeToParcel(questionParcel,0);
         DBHandler dbHandler=new DBHandler(this);
         long i= dbHandler.insertQuestion(question);
+        dbHandler.close();
+        Intent intent=new Intent(this,UploadAnother.class);
+        intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
+        intent.putExtra(ActivityConstants.USER_INPUT,userInput);
+        startActivity(intent);
 
         Toast.makeText(getBaseContext(),"Successfully uploaded",Toast.LENGTH_LONG).show();
     }
