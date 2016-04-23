@@ -56,5 +56,8 @@
             android:label="@string/title_activity_quiz_results"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity android:name=".activity.UploadAnother"
+            android:label="UploadAnother"
+            android:theme="@style/AppTheme"></activity>
        </application>
 </manifest>
