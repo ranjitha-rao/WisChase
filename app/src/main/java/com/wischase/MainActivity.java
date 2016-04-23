@@ -24,9 +24,10 @@ public class MainActivity extends ScrollingActivity {
 
 
         /** Test Input **/
+        long grade = 4;
         Category userInput = new Category("Sceince", "Physics",10);
         intent.putExtra(ActivityConstants.USER_INPUT, userInput);
-        intent.putExtra(ActivityConstants.GRADE_INPUT, 2);
+        intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
         /** Test Input **/
 
         startActivity(intent);
