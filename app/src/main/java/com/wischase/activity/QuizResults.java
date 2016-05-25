@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.wischase.R;
+import com.wischase.view.CustomButton;
 import com.wischase.view.CustomTextView;
 import com.wischase.view.menu.ScrollingActivity;
 

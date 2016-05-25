@@ -54,7 +54,7 @@ public class CreateTables {
     public static final String KEY_QUESTIONID = "questionid";
     public static final String KEY_OPTIONONE = "optionone";
     public static final String KEY_OPTIONTWO = "optiontwo";
-
+public static final String KEY_RANDOM="RANDOM()";
     public static final String KEY_OPTIONTHREE = "optionthree";
     public static final String KEY_OPTIONFOUR = "optionfour" ;
     public static final String KEY_CORRECTANSWER = "correctanswer";
