@@ -49,6 +49,8 @@ Spinner categoryspinner;
         }
         categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                category=(EditText)findViewById(R.id.editText);
+                category.setText(categoryspinner.getSelectedItem().toString());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -56,17 +58,20 @@ Spinner categoryspinner;
         });
     }
         public void nextscreen (View v){
-            Intent nextintent = new Intent(getBaseContext(),Optionscreen.class);
+            Intent nextintent = new Intent(getBaseContext(),Selectionscreen.class);
             startActivity(nextintent);
     }
         public void submit(View v) {
             category=(EditText)findViewById(R.id.editText);
-            String categoryname =getBaseContext().toString();
+            String categoryname =category.getText().toString();
             subcategory=(EditText)findViewById(R.id.editText2);
-            String subcategoryname =getBaseContext().toString();
-            DBHandler dbhandle =new DBHandler(getApplicationContext());
-            long newlyadded =dbhandle.insertUserAddedCatInfo(categoryname,subcategoryname);
-            Toast.makeText(getBaseContext(),newlyadded+"added",Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.activity_addcategory);
+            String subcategoryname =subcategory.getText().toString();
+            if((categoryname.equals(" "))&&(!(subcategoryname.equals(" "))))
+                categoryname=categoryspinner.getSelectedItem().toString();
+
+            DBHandler dbhandle =new DBHandler(this);
+           long newlyadded =dbhandle.insertUserAddedCatInfo(categoryname,subcategoryname);
+            Toast.makeText(getBaseContext(),categoryname+" added",Toast.LENGTH_SHORT).show();
+            //setContentView(R.layout.activity_addcategory);
         }
    }

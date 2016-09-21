@@ -43,7 +43,7 @@
             android:layout_gravity="fill_horizontal|center_horizontal" />
 <com.wischase.view.CustomButton
     android:text="search"
-    android:onClick="onSearchClick"
+    android:onClick="checkAvailablity"
     android:layout_column="1"
     android:layout_row="2"/>
         <SearchView

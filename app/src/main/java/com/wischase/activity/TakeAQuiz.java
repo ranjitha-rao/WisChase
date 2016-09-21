@@ -1,8 +1,9 @@
 package com.wischase.activity;
-
+import org.apache.commons.lang3.StringUtils;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
@@ -45,7 +46,7 @@ public class TakeAQuiz extends ScrollingActivity {
         super.onCreate(savedInstanceState);
         Intent inputIntent = getIntent();
         userInput = (Category)(inputIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
-        gradeInput= (int) inputIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0) - 2;
+        gradeInput= (int) (inputIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0) - 2);
         DBHandler dbHandle = new DBHandler(this);
         int categoryIdInput = userInput.getSubCategory().get(0).getCategoryId();
         //  offset = inputIntent.getIntExtra(ActivityConstants.QUIZAGAIN,0) * 20;
@@ -186,33 +187,36 @@ public class TakeAQuiz extends ScrollingActivity {
             ArrayList<String> options = new ArrayList<String>();
             options.add(optionOneText);
             options.add(optionTwoText);
-            if (optionThreeText != null) {
-                options.add(optionThreeText);
+           if ((optionThreeText!=null)&&(!(optionThreeText.equals(" ")))) {
+
+            options.add(optionThreeText);
                 noOfRadioButton = 3;
             }
-            if (optionFourText != null) {
-                options.add(optionFourText);
-                noOfRadioButton = 4;
+            if ((optionFourText!=null)&&(!(optionFourText.equals(" ")))) {
+                    options.add(optionFourText);
+                    noOfRadioButton = 4;
+
             }
             //Shuffling the options
             Collections.shuffle(options);
-            Log.v("option1:", options.get(0).toString());
-            Log.v("option2:", options.get(1).toString());
-            Log.v("option3:", options.get(2).toString());
-            Log.v("option4:", options.get(3).toString());// Option one
+            int siz=options.size();
+          //  Toast.makeText(this,"length is " + siz,Toast.LENGTH_LONG).show();
+// Option one
+
             int j = 0;
             //displaying the options which are not empty
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i <siz; i++) {
                 View view = cleanRadioGroup.getChildAt(j);
                 CustomRadioButton option;
-                if (!((options.get(i).toString()).equals(""))) {
-                    option = (CustomRadioButton) view;
-                    option.setClickable(true);
-                    option.setVisibility(View.VISIBLE);
-                    option.setText(options.get(i).toString());
-                    option.setFont(R.color.colorText);
-                    j++;
-                }
+             //Checking whether it is null or empty string
+                if(!(TextUtils.isEmpty(options.get(i)))) {
+                        option = (CustomRadioButton) view;
+                        option.setClickable(true);
+                        option.setVisibility(View.VISIBLE);
+                        option.setText(options.get(i).toString());
+                        option.setFont(R.color.colorText);
+                        j++;
+                    }
             }
             //hiding other radio buttons if there is no option3 or option 4
             for (; j < 4; j++) {
@@ -272,6 +276,7 @@ public class TakeAQuiz extends ScrollingActivity {
 
     public void changeCategory(View inputView) {
         Intent chgIntent=new Intent(this,Selectionscreen.class);
+        chgIntent.putExtras(getIntent().getExtras());
         startActivity(chgIntent);
     }
     /* Finding the correct answer from the radiogroup  and displaying it in green*/

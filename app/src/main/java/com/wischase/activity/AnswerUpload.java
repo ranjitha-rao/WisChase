@@ -28,14 +28,14 @@ Question question;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_answer_upload);
+       setContentView(R.layout.activity_answer_upload);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
    //Toast.makeText(getBaseContext(),q,Toast.LENGTH_LONG).show();
         Intent inputIntent = getIntent();
         question = inputIntent.getParcelableExtra(ActivityConstants.QUESTIONS);
         userInput=(Category)(inputIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
-        grade=inputIntent.getIntExtra(ActivityConstants.GRADE_INPUT,0);
+        grade=(int)(inputIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0)-2);
         super.updateCategoryTable(userInput, grade);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -46,6 +46,7 @@ Question question;
                         .setAction("Action", null).show();
             }
         });
+    //setContentView(R.layout.activity_answer_upload);
     }
 
     public int validatingAnswer(View view) {
@@ -83,15 +84,17 @@ Question question;
     {
         if((validatingAnswer(view))==0)
         {
-            Parcel questionParcel=null;
-            question.writeToParcel(questionParcel,0);
+            //Parcel questionParcel=null;
+            //question.writeToParcel(questionParcel,0);
             DBHandler dbHandler=new DBHandler(this);
            long i= dbHandler.insertQuestion(question);
+            Toast.makeText(getBaseContext(),"Successfully upload qnno:"+i,Toast.LENGTH_LONG).show();
             dbHandler.close();
           //  Toast.makeText(getBaseContext(),"successful",Toast.LENGTH_LONG).show();
             Intent intent=new Intent(this,UploadAnother.class);
-            intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
-            intent.putExtra(ActivityConstants.USER_INPUT, userInput);
+            //intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
+            //intent.putExtra(ActivityConstants.USER_INPUT, userInput);
+            intent.putExtras(getIntent().getExtras());
             startActivity(intent);
 
         }
@@ -102,8 +105,9 @@ Question question;
         {
             Intent intent=new Intent(this,ExplanationUpload.class);
             intent.putExtra(ActivityConstants.QUESTIONS,question );
-            intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
-            intent.putExtra(ActivityConstants.USER_INPUT,userInput);
+            intent.putExtras(getIntent().getExtras());
+       //     intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
+     //       intent.putExtra(ActivityConstants.USER_INPUT,userInput);
             startActivity(intent);
 
         }

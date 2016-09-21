@@ -28,12 +28,13 @@ public class Selectionscreen extends Activity {
     Map<String, Category> categorylist;
     List<SubCategory> subcategorylist;
     String subcategorySelected,categorySelected;
-
+int categoryId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selectionscreen);
+       setContentView(R.layout.activity_selectionscreen);
         gradearray = (Spinner) findViewById(R.id.Grade_Array);
+       // setContentView(R.layout.activity_selectionscreen);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.grade_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gradearray.setPrompt("Select a Grade");
@@ -42,7 +43,7 @@ public class Selectionscreen extends Activity {
     }
     private void updateCategory() {
         categorydd = (Spinner) findViewById(R.id.category_spinner);
-        DBHandler db = new DBHandler(getApplicationContext());
+        DBHandler db = new DBHandler(this);
         try {
             categorylist = db.getAllCategories();
             Collection<String> list = categorylist.keySet();
@@ -73,6 +74,7 @@ public class Selectionscreen extends Activity {
         subcategorydd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 subcategorySelected = subcategorydd.getSelectedItem().toString();
+                categoryId=subcategorylist.get(position).getCategoryId();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -85,18 +87,19 @@ public class Selectionscreen extends Activity {
         categoryIntent.putExtra(ActivityConstants.GRADE_INPUT, (String) gradearray.getSelectedItem());
         SubCategory subcategoryinput = new SubCategory();
         subcategoryinput.setSubCategory(subcategorySelected);
-        int categoryId =subcategoryinput.getCategoryId();
         categoryIntent.putExtra(ActivityConstants.USER_INPUT, categoryId);
         startActivity(categoryIntent);
     }
         public void next(View view){
-            Intent nextIntent = new Intent(getBaseContext(), Optionscreen.class);
-            nextIntent.putExtra(ActivityConstants.GRADE_INPUT, (String) gradearray.getSelectedItem());
-            SubCategory subcategoryinput = new SubCategory();
-            subcategoryinput.setSubCategory(subcategorySelected);
-            int categoryId = subcategoryinput.getCategoryId();
-            nextIntent.putExtra(ActivityConstants.USER_INPUT,categoryId);
-            Toast.makeText(getBaseContext(),categoryId+"",Toast.LENGTH_SHORT).show();
+        Intent nextIntent = new Intent(getBaseContext(), Optionscreen.class);
+            long grade=gradearray.getSelectedItemId();
+          //Toast.makeText(getApplicationContext(),"Grade "+grade,Toast.LENGTH_LONG);
+            nextIntent.putExtra(ActivityConstants.GRADE_INPUT, grade);
+            //SubCategory subcategoryinput = new SubCategory(subcategorySelected,categoryId);
+            //Toast.makeText(getApplicationContext(), "category id:"+categoryId, Toast.LENGTH_SHORT).show();
+            Category c=new Category(categorySelected,subcategorySelected,categoryId);
+            nextIntent.putExtra(ActivityConstants.USER_INPUT,c);
+            //Toast.makeText(getBaseContext(),categoryId+":",Toast.LENGTH_SHORT).show();
             startActivity(nextIntent);
         }
 }

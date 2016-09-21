@@ -33,7 +33,7 @@ public class ExplanationUpload extends UpdateTable {
         //String s=question.getQuestionText();
         //Toast.makeText(getBaseContext(),s,Toast.LENGTH_LONG).show();
         userInput=(Category)(intent.getParcelableExtra(ActivityConstants.USER_INPUT));
-        grade=intent.getIntExtra(ActivityConstants.GRADE_INPUT, 0);
+        grade=(int)(intent.getLongExtra(ActivityConstants.GRADE_INPUT, 0)-2);
         super.updateCategoryTable(userInput, grade);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -51,17 +51,18 @@ public class ExplanationUpload extends UpdateTable {
         EditText explan=(EditText)findViewById(R.id.explanation);
         String s=explan.getText().toString();
         question.setExplanation(s);
-
-        Parcel questionParcel=null;
-        question.writeToParcel(questionParcel,0);
+      //  Parcel questionParcel=null;
+    //    question.writeToParcel(questionParcel,0);
         DBHandler dbHandler=new DBHandler(this);
         long i= dbHandler.insertQuestion(question);
+        Toast.makeText(this,"qn no is"+i,Toast.LENGTH_LONG ).show();
         dbHandler.close();
         Intent intent=new Intent(this,UploadAnother.class);
-        intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
-        intent.putExtra(ActivityConstants.USER_INPUT,userInput);
+        getIntent().removeExtra(ActivityConstants.QUESTIONS);
+       // intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
+        intent.putExtras(getIntent().getExtras());
         startActivity(intent);
 
-        Toast.makeText(getBaseContext(),"Successfully uploaded",Toast.LENGTH_LONG).show();
+       // Toast.makeText(getBaseContext(),"Successfully uploaded",Toast.LENGTH_LONG).show();
     }
 }

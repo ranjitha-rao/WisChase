@@ -31,8 +31,6 @@
             android:layout_height="wrap_content" />
         <include layout="@layout/quiz_score_board" android:layout_gravity="right" android:layout_width="wrap_content" android:layout_height = "wrap_content"/>
 
-
-
     </GridLayout>
 
     <GridLayout
@@ -50,7 +48,6 @@
             android:layout_columnSpan="2"/>
 
     </GridLayout>
-
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_column="0"
@@ -65,7 +62,7 @@
             android:onClick="changeCategory" />
 
         <include layout="@layout/options_layout" android:layout_row="0" android:layout_column="0"
-            android:layout_height="wrap_content" android:layout_width="wrap_content"
+          android:layout_columnSpan="2"  android:layout_height="wrap_content" android:layout_width="wrap_content"
              />
 
         <com.wischase.view.CustomButton
@@ -84,4 +81,5 @@
         android:layout_alignParentBottom="true"
         >
     </android.support.design.widget.CoordinatorLayout>
+
 </GridLayout>

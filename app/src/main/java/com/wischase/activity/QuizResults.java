@@ -32,12 +32,10 @@ public class QuizResults extends ScrollingActivity {
         startActivity(quizAgainIntent);
     }
 
-    public void nextSetQuestion(View view) {
+    public void mainMenu(View view) {
 
-        Intent quizAgainIntent = new Intent(this, TakeAQuiz.class);
-        quizAgainIntent.putExtras(getIntent().getExtras());
-        int offset = getIntent().getIntExtra(ActivityConstants.QUIZAGAIN,0);
-        quizAgainIntent.putExtra(ActivityConstants.QUIZAGAIN, ++offset);
-        startActivity(quizAgainIntent);
+        Intent mainIntent = new Intent(this, Selectionscreen.class);
+        mainIntent.putExtras(getIntent().getExtras());
+        startActivity(mainIntent);
     }
 }

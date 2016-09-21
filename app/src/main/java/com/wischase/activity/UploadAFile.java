@@ -44,13 +44,13 @@ public class UploadAFile extends UpdateTable {
         setContentView(R.layout.activity_upload_afile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intent = getIntent();
-        if (getIntent().hasExtra(ActivityConstants.USER_INPUT)) {
-            userInput = (Category) (intent.getParcelableExtra(ActivityConstants.USER_INPUT));
-            grade = intent.getIntExtra(ActivityConstants.GRADE_INPUT, 0);
-            super.updateCategoryTable(userInput, grade);
+     Intent intent = getIntent();
+        //if (getIntent().hasExtra(ActivityConstants.USER_INPUT)) {
+          userInput = (Category) (intent.getParcelableExtra(ActivityConstants.USER_INPUT));
+            grade = (int)intent.getLongExtra(ActivityConstants.GRADE_INPUT,0) - 2;
+             super.updateCategoryTable(userInput, grade);
             categoryIdInput = userInput.getSubCategory().get(0).getCategoryId();
-        }
+       // }
         // mFilePathTextView = (TextView)findViewById(R.id.filena);
         //   mFilePathTextView.setText(s);
         /*if (getIntent().hasExtra(FilePickerActivity.EXTRA_FILE_PATH)) {
@@ -62,15 +62,15 @@ public class UploadAFile extends UpdateTable {
     public void checkAvailablity(View view) {
         try {
             // s is the absolute file path
-            FileInputStream fIn = new FileInputStream("/storage/emulated/0/Download/upload.xls");
+            FileInputStream fIn = new FileInputStream("/storage/emulated/0/Download/maths.xls");
              Workbook wb = Workbook.getWorkbook(fIn);
             Sheet s = wb.getSheet(0);
             int row = s.getRows();
             int col = s.getColumns();
             int failures=0;
             String rowNotUploaded="Rows that are not uploaded: ";
-            String xx = " ";
-            for (int i = 1; i < row; i++) {
+            String xx = "";
+            for (int i=1; i<=row; i++) {
                 Cell z = s.getCell(0,i);
                 xx = z.getContents();
                 //checking Question is given
@@ -78,7 +78,7 @@ public class UploadAFile extends UpdateTable {
                 if (!xx.equals("")) {
 //                Toast.makeText(getApplicationContext(), xx, Toast.LENGTH_LONG).show();
                     upload.setQuestionText(xx);
-                    z = s.getCell(1, i);
+                    z = s.getCell(1,i);
                     xx = z.getContents();
                     //Checking option1 is given
                            if (!xx.equals("")) {
@@ -106,7 +106,7 @@ public class UploadAFile extends UpdateTable {
                                 upload.setCategoryId(categoryIdInput);
                                 upload.setUserid(1);
                                 upload.setGrade(grade);
-                                DBHandler dbHandler = new DBHandler(this);
+                                DBHandler dbHandler = new DBHandler(getApplicationContext());
                                 long questNo = dbHandler.insertQuestion(upload);
                                 dbHandler.close();
                             }
@@ -143,65 +143,26 @@ public class UploadAFile extends UpdateTable {
 
                 }
             }
+            fIn.close();
             Toast.makeText(getBaseContext(), "Completed Uploading", Toast.LENGTH_LONG).show();
 
             if(failures==1){
-                Toast.makeText(getBaseContext(),rowNotUploaded,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),rowNotUploaded,Toast.LENGTH_LONG).show();
             }
-        }catch (FileNotFoundException e1) {
+        }
+        catch (FileNotFoundException e1) {
             // e1.printStackTrace();
             Toast.makeText(getApplicationContext(), "file not found exception", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Toast.makeText(getApplicationContext(), "io exception", Toast.LENGTH_LONG).show();
-        } catch (BiffException e) {
+        }
+        catch (BiffException e) {
             // e.printStackTrace();
             Toast.makeText(getApplicationContext(), "biff exception", Toast.LENGTH_LONG).show();
         }
     }
 
-
- /*   public void browseFolderSD(View v) {
-        if(Environment.isExternalStorageRemovable()) {
-            // Create a new Intent for the file picker activity
-            Intent intent = new Intent(this, FilePickerActivity.class);
-            // Only make .xls files visible
-            ArrayList<String> extensions = new ArrayList<String>();
-            extensions.add(".xls");
-            intent.putExtra(FilePickerActivity.EXTRA_ACCEPTED_FILE_EXTENSIONS, extensions);
-            //intent.putExtra(FilePickerActivity.EXTRA_FILE_PATH, Environment.getExternalStorageDirectory());
-           // intent.putExtra(FilePickerActivity.EXTRA_FILE_PATH,"/sdcard/");
-            // Start the activity
-            // startActivityForResult(intent, REQUEST_PICK_FILE);
-            //  break;
-            startActivity(intent);
-        }
-        else
-            Toast.makeText(getApplicationContext(),"SD card is not available",Toast.LENGTH_LONG).show();
-
-    }
-    public void browseFolderPhone(View view)
-    {
-        Intent intent = new Intent(this, FilePickerActivity.class);
-        ArrayList<String> extensions = new ArrayList<String>();
-        extensions.add(".xls");
-        intent.putExtra(FilePickerActivity.EXTRA_ACCEPTED_FILE_EXTENSIONS, extensions);
-        //these version needs checking for download directory alone
-        if((android.os.Build.VERSION.RELEASE.equals("4.3"))||(android.os.Build.VERSION.RELEASE.startsWith("4.2"))||(android.os.Build.VERSION.RELEASE.startsWith("4.1"))||(android.os.Build.VERSION.RELEASE.startsWith("4.0")))
-        {
-            if(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).isDirectory())
-            {
-                intent.putExtra(FilePickerActivity.EXTRA_FILE_PATH,  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));}
-        }
-        else
-        {
-            intent.putExtra(FilePickerActivity.EXTRA_FILE_PATH,Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
-        }startActivity(intent);
-
-    }
-    public void browseOneDrive(View view)
-    {
-
-    }*/
 }
    // @Override
  /*  protected void onActivityResult(int requestCode, int resultCode, Intent data) {

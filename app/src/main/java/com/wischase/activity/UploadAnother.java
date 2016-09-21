@@ -23,17 +23,18 @@ public class UploadAnother extends AppCompatActivity {
         setContentView(R.layout.activity_upload_another);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-Intent getIntent=getIntent();
-        userInput=(Category)(getIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
-        grade=getIntent.getIntExtra(ActivityConstants.GRADE_INPUT,0);
+Intent gtIntent=getIntent();
+        userInput=(Category)(gtIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
+        grade=(int)(gtIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0)-2);
         TextView text;
         Toast.makeText(this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
     }
 public void anotherQuestion(View view)
 {
     Intent intent=new Intent(this, QuestionUpload.class);
-    intent.putExtra(ActivityConstants.USER_INPUT,userInput);
-    intent.putExtra(ActivityConstants.GRADE_INPUT,grade);
+  //  intent.putExtra(ActivityConstants.USER_INPUT,userInput);
+    //intent.putExtra(ActivityConstants.GRADE_INPUT,grade);
+    intent.putExtras(getIntent().getExtras());
     startActivity(intent);
 
 }

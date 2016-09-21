@@ -26,30 +26,32 @@ public class Optionscreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_optionscreen);
-        Intent inputintent = getIntent();
-        gradeinput = (int) inputintent.getLongExtra(ActivityConstants.GRADE_INPUT, 0);
-        userinput =(Category)(inputintent.getParcelableExtra(ActivityConstants.USER_INPUT));
+       //
+       // Intent inputintent = getIntent();
+        //gradeinput = inputintent.getLongExtra(ActivityConstants.GRADE_INPUT, 0);
+        //userinput =(Category)(inputintent.getParcelableExtra(ActivityConstants.USER_INPUT));
         //categoryinput =userinput.getSubCategory().get(0).getCategoryId();
          }
 
     public void uploadfile(View v) {
-        Intent uploadfile = new Intent(getBaseContext(), UploadAFile.class);
-        uploadfile.putExtra(ActivityConstants.GRADE_INPUT,gradeinput);
-        uploadfile.putExtra(ActivityConstants.USER_INPUT,categoryinput);
+        Intent uploadfile = new Intent(this, UploadAFile.class);
+        uploadfile.putExtras(getIntent().getExtras());
+       // uploadfile.putExtra(ActivityConstants.USER_INPUT,categoryinput);
         startActivity(uploadfile);
     }
 
     public void uploadques(View v) {
-        Intent upquestion = new Intent(getBaseContext(), QuestionUpload.class);
-        upquestion.putExtra(ActivityConstants.GRADE_INPUT,gradeinput);
-        upquestion.putExtra(ActivityConstants.USER_INPUT,categoryinput);
+        Intent upquestion = new Intent(this, QuestionUpload.class);
+        //upquestion.putExtra(ActivityConstants.GRADE_INPUT,gradeinput);
+        //upquestion.putExtra(ActivityConstants.USER_INPUT,categoryinput);
+        upquestion.putExtras(getIntent().getExtras());
         startActivity(upquestion);
     }
 
     public void taketest(View v) {
-        Intent taketest = new Intent(getBaseContext(), TakeAQuiz.class);
-        taketest.putExtra(ActivityConstants.GRADE_INPUT,gradeinput);
-        taketest.putExtra(ActivityConstants.USER_INPUT,categoryinput);
+        Intent taketest = new Intent(this, TakeAQuiz.class);
+        taketest.putExtras(getIntent().getExtras());
+        //taketest.putExtra(ActivityConstants.USER_INPUT,categoryinput);
         startActivity(taketest);
     }
 }

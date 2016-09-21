@@ -44,6 +44,7 @@
             android:layout_rowSpan="2"
             android:layout_gravity="fill"
             android:focusable="true"
+            android:textCursorDrawable="@null"
             />
 
     <com.wischase.view.CustomButton
