@@ -29,4 +29,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'com.android.support:design:23.0.1'
     compile files('libs/jxl.jar')
+    compile files('libs/common-lang3.jar')
 }
