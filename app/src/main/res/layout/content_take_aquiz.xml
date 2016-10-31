@@ -12,7 +12,7 @@
     tools:context="com.wischase.activity.TakeAQuiz"
     tools:showIn="@layout/activity_take_aquiz"
     android:background="@color/colorBackground"
-    android:rowCount="10"
+    android:rowCount="12"
     android:columnCount="2">
 
     <GridLayout
@@ -72,6 +72,23 @@
             android:textStyle="bold"
             android:onClick="nextQuestion"
             android:id="@+id/nextbutton"/>
+        <com.wischase.view.CustomButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:id="@+id/del_quest"
+            android:onClick="delQuestion"
+            android:layout_row="3"
+            android:layout_column="0" />
+
+        <com.wischase.view.CustomButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/up_quest"
+            android:onClick="updateQuest"
+            android:layout_row="3"
+            android:layout_column="1" />
     </GridLayout>
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/snackbar"
@@ -81,5 +98,6 @@
         android:layout_alignParentBottom="true"
         >
     </android.support.design.widget.CoordinatorLayout>
+
 
 </GridLayout>

@@ -12,8 +12,9 @@ public class ActivityConstants {
     public static final String QUIZRESULTS = "quizResults";
     public static final String RIGHT_ANSWER = "Right Answer. ";
     public static final String WRONG_ANSWER = "Wrong Answer. ";
-
-
+public static final String MYPREFERENCE="prefs";
+public static final String USER_ID="userId";
+    public static final String QUEST_NO="quest_no";
 
     /* private String CATEGORY,SUBCATEGORY;
     private long USERID;

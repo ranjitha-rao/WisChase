@@ -66,12 +66,15 @@ Spinner categoryspinner;
             String categoryname =category.getText().toString();
             subcategory=(EditText)findViewById(R.id.editText2);
             String subcategoryname =subcategory.getText().toString();
-            if((categoryname.equals(" "))&&(!(subcategoryname.equals(" "))))
+            if((categoryname.equals(""))&&(!(subcategoryname.equals(""))))
                 categoryname=categoryspinner.getSelectedItem().toString();
-
-            DBHandler dbhandle =new DBHandler(this);
-           long newlyadded =dbhandle.insertUserAddedCatInfo(categoryname,subcategoryname);
-            Toast.makeText(getBaseContext(),categoryname+" added",Toast.LENGTH_SHORT).show();
-            //setContentView(R.layout.activity_addcategory);
+if(!(subcategoryname.equals(""))) {
+    DBHandler dbhandle = new DBHandler(this);
+    long newlyadded = dbhandle.insertUserAddedCatInfo(categoryname, subcategoryname);
+    Toast.makeText(getBaseContext(), subcategoryname + " added", Toast.LENGTH_SHORT).show();
+    //setContentView(R.layout.activity_addcategory);
+}
+            else
+    Toast.makeText(getBaseContext(),"Please add a subcategory",Toast.LENGTH_LONG).show();
         }
    }

@@ -91,16 +91,22 @@ int categoryId;
         startActivity(categoryIntent);
     }
         public void next(View view){
-        Intent nextIntent = new Intent(getBaseContext(), Optionscreen.class);
-            long grade=gradearray.getSelectedItemId();
-          //Toast.makeText(getApplicationContext(),"Grade "+grade,Toast.LENGTH_LONG);
-            nextIntent.putExtra(ActivityConstants.GRADE_INPUT, grade);
-            //SubCategory subcategoryinput = new SubCategory(subcategorySelected,categoryId);
-            //Toast.makeText(getApplicationContext(), "category id:"+categoryId, Toast.LENGTH_SHORT).show();
-            Category c=new Category(categorySelected,subcategorySelected,categoryId);
-            nextIntent.putExtra(ActivityConstants.USER_INPUT,c);
-            //Toast.makeText(getBaseContext(),categoryId+":",Toast.LENGTH_SHORT).show();
-            startActivity(nextIntent);
+
+            if((gradearray.getSelectedItemId()!=0)&&(gradearray!=null)) {
+                Intent nextIntent = new Intent(getBaseContext(), Optionscreen.class);
+                long grade = gradearray.getSelectedItemId();
+
+                //Toast.makeText(getApplicationContext(),"Grade "+grade,Toast.LENGTH_LONG);
+                nextIntent.putExtra(ActivityConstants.GRADE_INPUT, grade);
+                //SubCategory subcategoryinput = new SubCategory(subcategorySelected,categoryId);
+                //Toast.makeText(getApplicationContext(), "category id:"+categoryId, Toast.LENGTH_SHORT).show();
+                Category c = new Category(categorySelected, subcategorySelected, categoryId);
+                nextIntent.putExtra(ActivityConstants.USER_INPUT, c);
+                //Toast.makeText(getBaseContext(),categoryId+":",Toast.LENGTH_SHORT).show();
+                startActivity(nextIntent);
+            }
+            else
+                Toast.makeText(this,"Please choose a grade...",Toast.LENGTH_LONG ).show();
         }
 }
 

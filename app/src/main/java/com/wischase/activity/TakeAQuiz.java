@@ -1,9 +1,15 @@
 package com.wischase.activity;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
@@ -14,6 +20,7 @@ import android.widget.Toast;
 import com.wischase.Category;
 import com.wischase.Question;
 import com.wischase.R;
+import com.wischase.db.CreateTables;
 import com.wischase.db.DBHandler;
 import com.wischase.view.CustomButton;
 import com.wischase.view.CustomRadioButton;
@@ -41,13 +48,19 @@ public class TakeAQuiz extends ScrollingActivity {
     RadioGroup cleanRadioGroup;
     int gradeInput;
     Category userInput;
+    int questId;
+    long questuserId;
+    long userId=0;
+    boolean success=false;
+    CustomButton deletebutton,updatebutton;
+    DBHandler dbHandle = new DBHandler(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent inputIntent = getIntent();
         userInput = (Category)(inputIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
         gradeInput= (int) (inputIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0) - 2);
-        DBHandler dbHandle = new DBHandler(this);
+
         int categoryIdInput = userInput.getSubCategory().get(0).getCategoryId();
         //  offset = inputIntent.getIntExtra(ActivityConstants.QUIZAGAIN,0) * 20;
         questionList = dbHandle.getAllQuestions(categoryIdInput, gradeInput, offset);
@@ -56,7 +69,19 @@ public class TakeAQuiz extends ScrollingActivity {
         updateQuestion(Boolean.FALSE, null);
         updateScoreCard(userInput, gradeInput);
         timeElapsed.start();
-
+        deletebutton=(CustomButton)findViewById(R.id.del_quest);
+        updatebutton=(CustomButton)findViewById(R.id.up_quest);
+    //If userid of the question and userid of the login are not same, then they cannot delete the question
+        if((questuserId!=userId)||(questionList.size()==0))
+        {
+            deletebutton.setVisibility(View.INVISIBLE);
+            updatebutton.setVisibility(View.INVISIBLE);
+        }
+        //If both are same, then they can delete the question
+        else {
+            deletebutton.setVisibility(View.VISIBLE);
+            updatebutton.setVisibility(View.VISIBLE);
+        }
     }
 
     private void updateScoreCard(Category userInput, int gradeInput) {
@@ -101,12 +126,12 @@ public class TakeAQuiz extends ScrollingActivity {
             nextQuestion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent (TakeAQuiz.this,QuestionUpload.class);
+                    Intent intent = new Intent(TakeAQuiz.this, QuestionUpload.class);
                     intent.putExtras(getIntent().getExtras());
                     startActivity(intent);
                 }
             });
-
+            //deletebutton.setVisibility(View.INVISIBLE);
         }
 
         else {
@@ -170,7 +195,8 @@ public class TakeAQuiz extends ScrollingActivity {
             else if (currentCorrectAnswer == 2) answer = questionToDisplay.getOptionTwo();
             else if (currentCorrectAnswer == 3) answer = questionToDisplay.getOptionThree();
             else answer = questionToDisplay.getOptionFour();
-
+            questId=questionToDisplay.getQuestionId();
+            questuserId=questionToDisplay.getUserid();
             // Set the question text
 
             String questionString = questionToDisplay.getQuestionText();
@@ -291,4 +317,46 @@ public class TakeAQuiz extends ScrollingActivity {
         }
         return correctAnswerIndex;
     }
+    public void delQuestion(View view)
+    {
+      View.OnClickListener mdel = new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              // SharedPreferences editor=getSharedPreferences(ActivityConstants.MYPREFERENCE, Context.MODE_PRIVATE);
+              //long userID=editor.getLong(ActivityConstants.USER_ID, 2);
+              success = dbHandle.deleteQuestion(questId);
+              deletedornot(view);
+          }
+      };
+
+
+      Snackbar snackBar = Snackbar.make(findViewById(android.R.id.content), "Do you want to really delete", Snackbar.LENGTH_INDEFINITE).setAction("Yes", mdel);
+      snackBar.show();
+
+       }
+    public void deletedornot(View view)
+    {
+    if(success==true) {
+        Toast.makeText(this, "Deleted successfully", Toast.LENGTH_LONG).show();
+        nextQuestion(view);
+    }}
+public void updateQuest(View view){
+    /*View.OnClickListener mupdate = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            // SharedPreferences editor=getSharedPreferences(ActivityConstants.MYPREFERENCE, Context.MODE_PRIVATE);
+            //long userID=editor.getLong(ActivityConstants.USER_ID, 2);*/
+            Intent intent=new Intent(this,QuestionUpload.class);
+            intent.putExtras(getIntent().getExtras());
+            intent.putExtra(ActivityConstants.QUEST_NO, questId);
+            startActivity(intent);
+
+        }
+    //};
+
+
+    /*Snackbar snackBar = Snackbar.make(findViewById(android.R.id.content), "Do you want to edit the question", Snackbar.LENGTH_INDEFINITE).setAction("Yes", mupdate);
+    snackBar.show();
+
+}*/
 }

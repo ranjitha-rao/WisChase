@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -21,33 +22,39 @@ import com.wischase.view.menu.ScrollingActivity;
 
 import java.util.List;
 
-public class AnswerUpload extends UpdateTable {
+public class AnswerUpload extends AnswerEditing {
 Question question;
     int grade;
     Category userInput;
+    int questionId;
+AnswerEditing answer=new AnswerEditing();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_answer_upload);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
    //Toast.makeText(getBaseContext(),q,Toast.LENGTH_LONG).show();
         Intent inputIntent = getIntent();
-        question = inputIntent.getParcelableExtra(ActivityConstants.QUESTIONS);
+
+      question = inputIntent.getParcelableExtra(ActivityConstants.QUESTIONS);
         userInput=(Category)(inputIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
         grade=(int)(inputIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0)-2);
+        questionId=(int)inputIntent.getIntExtra(ActivityConstants.QUEST_NO,0);
         super.updateCategoryTable(userInput, grade);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    //setContentView(R.layout.activity_answer_upload);
-    }
+        if(questionId!=0)
+        {
+       super.updateQuestion(question, questionId);
+
+//AnswerEditing answer=new AnswerEditing();
+         /* if((answer.updatingQuestion(question))==1)
+            Toast.makeText(this,"Displayed",Toast.LENGTH_LONG ).show();
+*/
+        }
+
+       }
+
 
     public int validatingAnswer(View view) {
         EditText op1 = (EditText) findViewById(R.id.up_option1);
@@ -80,23 +87,24 @@ Question question;
             }
         return i;
     }
-    public void uploadAnswer(View view)
-    {
-        if((validatingAnswer(view))==0)
-        {
+    public void uploadAnswer(View view) {
+        if (((validatingAnswer(view)) == 0) && (questionId == 0)) {
             //Parcel questionParcel=null;
             //question.writeToParcel(questionParcel,0);
-            DBHandler dbHandler=new DBHandler(this);
-           long i= dbHandler.insertQuestion(question);
-            Toast.makeText(getBaseContext(),"Successfully upload qnno:"+i,Toast.LENGTH_LONG).show();
+            DBHandler dbHandler = new DBHandler(this);
+            long i = dbHandler.insertQuestion(question);
+            Toast.makeText(getBaseContext(), "Successfully upload qnno:" + i, Toast.LENGTH_LONG).show();
             dbHandler.close();
-          //  Toast.makeText(getBaseContext(),"successful",Toast.LENGTH_LONG).show();
-            Intent intent=new Intent(this,UploadAnother.class);
+            //  Toast.makeText(getBaseContext(),"successful",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, UploadAnother.class);
             //intent.putExtra(ActivityConstants.GRADE_INPUT, grade);
             //intent.putExtra(ActivityConstants.USER_INPUT, userInput);
             intent.putExtras(getIntent().getExtras());
             startActivity(intent);
 
+        }
+        if (((validatingAnswer(view)) == 0) && (questionId != 0)) {
+           super.updateAnswer(0);
         }
     }
     public void nextExplanation(View view)
@@ -114,3 +122,4 @@ Question question;
 
     }
 }
+

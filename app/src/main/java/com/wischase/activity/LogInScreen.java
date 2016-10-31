@@ -45,7 +45,7 @@ public class LogInScreen extends ScrollingActivity {
 
         //Put the values in the shared preference
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putLong(Uid, UserId);
+        editor.putLong(ActivityConstants.USER_ID, UserId);
         editor.putString(Uname, UsrName);
         editor.commit();
 

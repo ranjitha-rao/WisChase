@@ -20,6 +20,8 @@ public class CreateTables {
      * Sub category column
      */
     public static String KEY_SUBCATEGORY = "subCategory";
+    /*constraint for subCategory and categoryName*/
+    public static String KEY_CATEGORIES="categories";
     /**
      * Keep track of inserted the category.
      */
@@ -27,7 +29,7 @@ public class CreateTables {
     /**
      * Create statement. Initial database setup
      */
-    public final static String CREATE_CATEGORY_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_CATEGORY + " (" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_CATEGORYNAME + " TEXT," + KEY_SUBCATEGORY + " TEXT," + KEY_USER + " TEXT )";
+    public final static String CREATE_CATEGORY_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_CATEGORY + " (" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_CATEGORYNAME + " TEXT not null," + KEY_SUBCATEGORY + " TEXT not null," + KEY_USER + " TEXT,"+"constraint "+ KEY_CATEGORIES + " unique("+ KEY_CATEGORYNAME+","+KEY_SUBCATEGORY+"))";
 
     /**
      * User table name
@@ -65,6 +67,7 @@ public static final String KEY_RANDOM="RANDOM()";
      */
     public final static String CREATE_QUESTION_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTION + " (" + KEY_USER_ID + " INTEGER , " + KEY_ID + " INTEGER , " + KEY_GRADE + " INTEGER , "+KEY_QUESTIONID+" INTEGER PRIMARY KEY , "+ KEY_QUESTION +" TEXT , "+ KEY_OPTIONONE +" TEXT , " + KEY_OPTIONTWO +" TEXT , " + KEY_OPTIONTHREE +" TEXT , " + KEY_OPTIONFOUR +" TEXT , " + KEY_CORRECTANSWER + " TEXT , " +KEY_EXPLANATION + " TEXT , "+ "FOREIGN KEY( " + KEY_ID +" ) REFERENCES " + TABLE_CATEGORY + "( " +KEY_ID + "), FOREIGN KEY( " + KEY_USER_ID +" ) REFERENCES " + TABLE_USER + "( " +KEY_USER_ID + ") )" ;
 
+public static final String DELETE_QUESTION="DELETE FROM"+TABLE_QUESTION;
 
 
 

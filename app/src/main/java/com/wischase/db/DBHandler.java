@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.wischase.Category;
@@ -104,7 +106,7 @@ public class DBHandler extends SQLiteOpenHelper{
         // Column to be returned from DB.
         String[] columns = {CreateTables.KEY_ID,CreateTables.KEY_CATEGORYNAME,CreateTables.KEY_SUBCATEGORY};
         // The below query returns rows which are grouped by category name. The rows with same category and ordered by category id
-        Cursor categoryCursor= categoryDB.query(CreateTables.TABLE_CATEGORY, columns, null, null, null, null, null, null);
+        Cursor categoryCursor= categoryDB.query(CreateTables.TABLE_CATEGORY, columns, null, null, null, null, CreateTables.KEY_CATEGORYNAME, null);
         categoryCursor.moveToFirst();
         // This will combine rows with same category name and add the subcategories
         Map<String, Category> categoryMap = cursorToCategoryList(categoryCursor);
@@ -325,6 +327,59 @@ public void insertSampleQuestions(SQLiteDatabase db)  {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+    public boolean deleteQuestion(int questionId)
+    {
+         SQLiteDatabase questionDb = this.getWritableDatabase();
+
+    //questionDb.execSQL("delete from question where questionId='" + questionId + "'and userId='" + userId + "'");
+     boolean result=questionDb.delete(CreateTables.TABLE_QUESTION, CreateTables.KEY_QUESTIONID + "=" + questionId, null)>0;
+                questionDb.close();
+        return result;
+    }
+    public Question getAQuestion(int questionId)
+    {
+        SQLiteDatabase questionDb=this.getReadableDatabase();
+        String[] columnQuestion = {CreateTables.KEY_QUESTION,CreateTables.KEY_OPTIONONE,CreateTables.KEY_OPTIONTWO, CreateTables.KEY_OPTIONTHREE, CreateTables.KEY_OPTIONFOUR, CreateTables.KEY_CORRECTANSWER, CreateTables.KEY_EXPLANATION, CreateTables.KEY_USER_ID,CreateTables.KEY_ID};
+        Cursor cursor=questionDb.query(CreateTables.TABLE_QUESTION, columnQuestion, CreateTables.KEY_QUESTIONID + "=" + questionId, null, null, null, null);
+        Question question=new Question();
+        cursor.moveToFirst();
+        //while(!cursor.moveToLast()) {
+            int questionTextCount = cursor.getColumnIndex(CreateTables.KEY_QUESTION);
+            String questionTxt = cursor.getString(questionTextCount);
+            question.setQuestionText(questionTxt);
+            question.setQuestionId(questionId);
+            int optionOne = cursor.getColumnIndex(CreateTables.KEY_OPTIONONE);
+            question.setOptionOne(cursor.getString(optionOne));
+            int optionTwo = cursor.getColumnIndex(CreateTables.KEY_OPTIONTWO);
+            question.setOptionTwo(cursor.getString(optionTwo));
+            int optionThree = cursor.getColumnIndex(CreateTables.KEY_OPTIONTHREE);
+            question.setOptionThree(cursor.getString(optionThree));
+            int optionFour = cursor.getColumnIndex(CreateTables.KEY_OPTIONFOUR);
+            question.setOptionFour(cursor.getString(optionFour));
+            int answer = cursor.getColumnIndex(CreateTables.KEY_CORRECTANSWER);
+            question.setCorrectAnswer(cursor.getInt(answer));
+            int explanation = cursor.getColumnIndex(CreateTables.KEY_EXPLANATION);
+            question.setExplanation(cursor.getString(explanation));
+       // int categoryIdCount=cursor.getColumnIndex(CreateTables.KEY_ID);
+        //int categoryId=cursor.getInt(categoryIdCount);
+        //question.setCategoryId(categoryId);
+
+        int userIdCount = cursor.getColumnIndex(CreateTables.KEY_USER_ID);
+            int userid = cursor.getInt(userIdCount);
+            question.setUserid(userid);
+          //  cursor.moveToNext();
+        //}
+        return question;
+    }
+
+public int updateQuestion(Question question,int questionId){
+    SQLiteDatabase questionDB=this.getWritableDatabase();
+    int success=0;
+  ContentValues content=questionToContentValues(question);
+success=questionDB.update(CreateTables.TABLE_QUESTION, content, CreateTables.KEY_QUESTIONID + "=" + questionId, null);
+
+   return success;
+}
 
 
 
