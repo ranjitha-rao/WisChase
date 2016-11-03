@@ -11,15 +11,13 @@ import android.widget.Toast;
 import com.wischase.R;
 import com.wischase.UserInfo;
 import com.wischase.db.DBHandler;
+import com.wischase.utils.SharedPref;
 import com.wischase.view.menu.ScrollingActivity;
 
 public class LogInScreen extends ScrollingActivity {
 
     //Shared Preference instance
-    public static final String MyPREFERENCES = "MyPrefs" ;
-    public static final String Uid = "UserId";
-    public static final String Uname = "UserName";
-    SharedPreferences sharedpreferences;
+    SharedPref sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +31,7 @@ public class LogInScreen extends ScrollingActivity {
         //Retrieve the user name from the User
         EditText ed1 = (EditText)findViewById(R.id.userNameEntry);
         String UsrName = ed1.getText().toString();
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
 
         //Insert or retrieve the user details from DB
         DBHandler DB1 = new DBHandler(getApplicationContext());
@@ -44,10 +42,9 @@ public class LogInScreen extends ScrollingActivity {
         Toast.makeText(getBaseContext(),UsrName, Toast.LENGTH_LONG).show();
 
         //Put the values in the shared preference
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putLong(ActivityConstants.USER_ID, UserId);
-        editor.putString(Uname, UsrName);
-        editor.commit();
+        sharedpreferences = new SharedPref();
+        sharedpreferences.save(getApplicationContext(),UserId,UsrName);
+
 
         // Passing the User Info to the next Screen
         setContentView(R.layout.activity_selectionscreen);
