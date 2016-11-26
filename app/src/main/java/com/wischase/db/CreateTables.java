@@ -45,10 +45,17 @@ public class CreateTables {
      * User name s entered by the user
      */
     public static final String KEY_USERNAME = "username";
+
+    // sri_suki - Password field added
+    public static final String KEY_PASSWORD = "password";
+
+    // sri_suki - LogIn Type field added
+    public static final String KEY_LOGINTYPE = "logintype";
+
     /**
-     * Create statement for User table. Intial data setup
+     * Create statement for User table. Initial data setup
      */
-    public final static String CREATE_USER_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_USER + " (" + KEY_USER_ID + " INTEGER PRIMARY KEY," + KEY_USERNAME + " TEXT not null unique )";
+    public final static String CREATE_USER_TB = "CREATE TABLE IF NOT EXISTS " + TABLE_USER + " (" + KEY_USER_ID + " INTEGER PRIMARY KEY," + KEY_USERNAME + " TEXT not null unique," + KEY_PASSWORD + " TEXT not null," + KEY_LOGINTYPE + " TEXT not null)";
 
     public static final String TABLE_QUESTION = "question";
     public static final String KEY_GRADE = "grade";
