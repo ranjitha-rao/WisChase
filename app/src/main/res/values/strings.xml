@@ -13,7 +13,10 @@
     <string name="title_activity_questionupload">QuestionUpload</string>
     <string name="title_activity_loginscreen">LogInScreen</string>
     <string name="Welcome_Msg">Welcome to QuizWhiz</string>
+    <string name="teacher">Teacher</string>
+    <string name="student">Student</string>
     <string name="user_Name">User Name :</string>
+    <string name="password">Password :</string>
     <string name="logIn_SignUp">Sign In</string>
     <string name="title_activity_explanation_upload">ExplanationUpload</string>
     <string name="title_activity_answer_upload">title_activity_answer_upload</string>
