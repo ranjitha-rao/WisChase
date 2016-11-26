@@ -29,29 +29,36 @@ public class LogInScreen extends ScrollingActivity {
     public void signIn(View v) {
 
         //Retrieve the user name from the User
-        EditText ed1 = (EditText)findViewById(R.id.userNameEntry);
+        EditText ed1 = (EditText) findViewById(R.id.userNameEntry);
         String UsrName = ed1.getText().toString();
 
+        //Check if User Name is Null
+        if (UsrName.equals("")) {
+            Toast.makeText(getBaseContext(), "Enter a UserName", Toast.LENGTH_SHORT).show();
+            return;
+        } else
 
-        //Insert or retrieve the user details from DB
-        DBHandler DB1 = new DBHandler(getApplicationContext());
-        long UserId = DB1.insertUserInfo(UsrName);
+        {
+            //Insert or retrieve the user details from DB
+            DBHandler DB1 = new DBHandler(getApplicationContext());
+            long UserId = DB1.insertUserInfo(UsrName);
 
-        //Toast for testing purpose. Should be removed after testing
-        Toast.makeText(getBaseContext(),"Value is " +UserId, Toast.LENGTH_LONG).show();
-        Toast.makeText(getBaseContext(),UsrName, Toast.LENGTH_LONG).show();
+            //Toast for testing purpose. Should be removed after testing
+            Toast.makeText(getBaseContext(), "Value is " + UserId, Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), UsrName, Toast.LENGTH_LONG).show();
 
-        //Put the values in the shared preference
-        sharedpreferences = new SharedPref();
-        sharedpreferences.save(getApplicationContext(),UserId,UsrName);
+            //Put the values in the shared preference
+            sharedpreferences = new SharedPref();
+            sharedpreferences.save(getApplicationContext(), UserId, UsrName);
 
 
-        // Passing the User Info to the next Screen
-        setContentView(R.layout.activity_selectionscreen);
-        Intent i = new Intent(getBaseContext(),Selectionscreen.class);
+            // Passing the User Info to the next Screen
+            setContentView(R.layout.activity_selectionscreen);
+            Intent i = new Intent(getBaseContext(), Selectionscreen.class);
 
-        //Display the Screen
-        startActivity(i);
+            //Display the Screen
+            startActivity(i);
+        }
+
     }
-
 }
