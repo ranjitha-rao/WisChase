@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.wischase.R;
@@ -14,10 +15,13 @@ import com.wischase.db.DBHandler;
 import com.wischase.utils.SharedPref;
 import com.wischase.view.menu.ScrollingActivity;
 
+import java.lang.reflect.Type;
+
 public class LogInScreen extends ScrollingActivity {
 
     //Shared Preference instance
     SharedPref sharedpreferences;
+    String Type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +43,51 @@ public class LogInScreen extends ScrollingActivity {
         } else
 
         {
-            //Insert or retrieve the user details from DB
-            DBHandler DB1 = new DBHandler(getApplicationContext());
-            long UserId = DB1.insertUserInfo(UsrName);
+            //Retrieve the password from the User
+            EditText ed2 = (EditText) findViewById(R.id.passwordEntry);
+            String Password = ed2.getText().toString();
 
-            //Toast for testing purpose. Should be removed after testing
-            Toast.makeText(getBaseContext(), "Value is " + UserId, Toast.LENGTH_LONG).show();
-            Toast.makeText(getBaseContext(), UsrName, Toast.LENGTH_LONG).show();
+            //Retrieve the type from the User
+            RadioGroup radioGroup = (RadioGroup)findViewById(R.id.logInType);
+            int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
 
-            //Put the values in the shared preference
-            sharedpreferences = new SharedPref();
-            sharedpreferences.save(getApplicationContext(), UserId, UsrName);
+            // No item selected
+            if (checkedRadioButtonId == -1) {
+                Toast.makeText(getBaseContext(), "Select your typeof LogIn", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            else {
+
+                //Check if type is Teacher
+                if (checkedRadioButtonId == R.id.teacher){
+                    Type = "T";
+                }
+                //Check if type is Student
+                else if(checkedRadioButtonId == R.id.student){
+                   Type = "S";
+                }
+
+                //Insert or retrieve the user details from DB
+                DBHandler DB1 = new DBHandler(getApplicationContext());
+                long UserId = DB1.insertUserInfo(UsrName, Password,Type);
+
+                //Toast for testing purpose. Should be removed after testing
+                Toast.makeText(getBaseContext(), "Value is " + UserId, Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), UsrName, Toast.LENGTH_LONG).show();
+
+                //Put the values in the shared preference
+                sharedpreferences = new SharedPref();
+                sharedpreferences.save(getApplicationContext(), UserId, UsrName);
 
 
-            // Passing the User Info to the next Screen
-            setContentView(R.layout.activity_selectionscreen);
-            Intent i = new Intent(getBaseContext(), Selectionscreen.class);
+                // Passing the User Info to the next Screen
+                setContentView(R.layout.activity_selectionscreen);
+                Intent i = new Intent(getBaseContext(), Selectionscreen.class);
 
-            //Display the Screen
-            startActivity(i);
+                //Display the Screen
+                startActivity(i);
+            }
         }
 
     }
