@@ -57,6 +57,8 @@ public class DBHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         String SYSTEMUSER = "systemUser";
+        String PASSWORD = "systemUser";
+        String TYPE= "A";
         // Create the category table
         db.execSQL(CreateTables.CREATE_CATEGORY_TB);
         // Initial DB setup
@@ -64,7 +66,7 @@ public class DBHandler extends SQLiteOpenHelper{
         // Create user table
         db.execSQL(CreateTables.CREATE_USER_TB);
         // Insert system user
-        addUserInfo(SYSTEMUSER, db);
+        addUserInfo(SYSTEMUSER,PASSWORD,TYPE,db);
         // Create question table
         db.execSQL(CreateTables.CREATE_QUESTION_TB);
         // Insert sample questions
@@ -132,9 +134,10 @@ public class DBHandler extends SQLiteOpenHelper{
      * @param userName User name as entered by user
      * @return The rowId. This will be the unique identifier value stored in user Id column.
      */
-    public long insertUserInfo(String userName)  {
+    //Shan - added the field password and type
+    public long insertUserInfo(String userName,String password,String type)  {
         SQLiteDatabase userDB = this.getWritableDatabase();
-        long userId = addUserInfo(userName, userDB);
+        long userId = addUserInfo(userName,password,type,userDB);
         userDB.close();
         return userId;
     }
@@ -147,10 +150,15 @@ public class DBHandler extends SQLiteOpenHelper{
      * @return Returns the newly created usere id or if user already exists then the
      * existing userid
      */
-    private long addUserInfo(String userName, SQLiteDatabase userDB) {
+
+    //Shan - added the field password and type
+    private long addUserInfo(String userName,String password,String type, SQLiteDatabase userDB) {
         // User name as entered by the user
         ContentValues userInfo = new ContentValues(1);
         userInfo.put(CreateTables.KEY_USERNAME, userName);
+        //Shan - add password and Type
+        userInfo.put(CreateTables.KEY_PASSWORD,password);
+        userInfo.put(CreateTables.KEY_LOGINTYPE,type);
         // Get the rowid. This will be the user id.
         /** long userId = userDB.insertWithOnConflict(CreateTables.TABLE_USER, null, userInfo,SQLiteDatabase.CONFLICT_IGNORE);
          * As per the documentation this should work but there is a issue in the SDK and the documentation is wrong.
