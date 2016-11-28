@@ -116,6 +116,8 @@
             android:padding="10dip"
             android:textSize="@dimen/questionTextSize"
             android:layout_gravity="left"
+            android:inputType="textPassword"
+            android:password="true"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="150dp" />
 
