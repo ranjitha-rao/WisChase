@@ -15,6 +15,8 @@ public class ActivityConstants {
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String USER_ID="UserId";
     public static final String USER_NAME = "UserName";
+    public static final String STUD_TYPE="S";
+    public static final String TEACH_TYPE ="T";
     public static final String QUEST_NO="quest_no";
 
     /* private String CATEGORY,SUBCATEGORY;

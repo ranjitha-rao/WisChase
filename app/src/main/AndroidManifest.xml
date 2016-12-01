@@ -5,8 +5,9 @@
     <uses-sdk android:minSdkVersion="14" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,27 +15,27 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".activity.TakeAQuiz"
             android:label="@string/title_activity_take_aquiz"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.Addcategory"
             android:label="@string/title_activity_addcategory"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.Optionscreen"
             android:label="@string/title_activity_optionscreen"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.QuestionUpload"
             android:label="@string/title_activity_questionupload"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.Selectionscreen"
             android:label="@string/title_activity_selectionscreen"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.LogInScreen"
             android:label="@string/title_activity_loginscreen"
@@ -48,22 +49,28 @@
         <activity
             android:name=".activity.AnswerUpload"
             android:label="@string/title_activity_answer_upload"
-            android:theme="@style/AppTheme"> </activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.ExplanationUpload"
             android:label="@string/title_activity_explanation_upload"
-            android:theme="@style/AppTheme"> </activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.UploadAFile"
             android:label="@string/title_activity_upload_afile"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.QuizResults"
             android:label="@string/title_activity_quiz_results"
-            android:theme="@style/AppTheme" android:noHistory="true"></activity>
+            android:noHistory="true"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.UploadAnother"
             android:label="UploadAnother"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.ForgotPassword"
+            android:label="@string/title_activity_forgot_password"
             android:theme="@style/AppTheme"></activity>
-       </application>
+    </application>
+
 </manifest>

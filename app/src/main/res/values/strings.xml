@@ -17,7 +17,10 @@
     <string name="student">Student</string>
     <string name="user_Name">User Name :</string>
     <string name="password">Password :</string>
+    <string name="eMail">Enter email </string>
+    <string name="send">Send </string>
     <string name="logIn_SignUp">Sign In</string>
+    <string name="forgot_pwd">Forget password?</string>
     <string name="title_activity_explanation_upload">ExplanationUpload</string>
     <string name="title_activity_answer_upload">title_activity_answer_upload</string>
     <string name="title_activity_upload_afile">UploadAFile</string>
@@ -43,4 +46,5 @@
     <string name="scoreString">You scored</string>
     <string name="quizWhiz">You are a</string>
     <string name="title_activity_quiz_results">QuizResults</string>
+    <string name="title_activity_forgot_password">ForgotPassword</string>
 </resources>
