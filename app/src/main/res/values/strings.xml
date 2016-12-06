@@ -24,7 +24,10 @@
     <string name="title_activity_explanation_upload">ExplanationUpload</string>
     <string name="title_activity_answer_upload">title_activity_answer_upload</string>
     <string name="title_activity_upload_afile">UploadAFile</string>
-
+    <string name="option1">Option 1</string>
+    <string name="option2">Option 2</string>
+    <string name="option3">Option 3</string>
+    <string name="option4">Option 4</string>
     <string-array name="grade_array">
         <item>Select Grade</item>
         <item>Pre-K</item>

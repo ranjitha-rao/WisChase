@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.wischase.R;
+import com.wischase.utils.SharedPref;
 import com.wischase.view.CustomButton;
 import com.wischase.view.CustomTextView;
 import com.wischase.view.menu.ScrollingActivity;
 
 public class QuizResults extends ScrollingActivity {
+    SharedPref sharedpreferences=new SharedPref();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,9 @@ public class QuizResults extends ScrollingActivity {
 
     private void displayQuizResults() {
         String showResults = getIntent().getStringExtra(ActivityConstants.QUIZRESULTS);
+        String uname=sharedpreferences.getUsrname(this);
+        CustomTextView username=(CustomTextView)findViewById(R.id.userName);
+        username.setText(uname);
         CustomTextView showResultTextView = (CustomTextView) findViewById(R.id.showResult);
         showResultTextView.setText(showResults);
     }

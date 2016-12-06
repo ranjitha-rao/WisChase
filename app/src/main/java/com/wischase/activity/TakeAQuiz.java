@@ -2,18 +2,22 @@ package com.wischase.activity;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ import com.wischase.Question;
 import com.wischase.R;
 import com.wischase.db.CreateTables;
 import com.wischase.db.DBHandler;
+import com.wischase.utils.SharedPref;
 import com.wischase.view.CustomButton;
 import com.wischase.view.CustomRadioButton;
 import com.wischase.view.CustomTextView;
@@ -50,7 +55,7 @@ public class TakeAQuiz extends ScrollingActivity {
     Category userInput;
     int questId;
     long questuserId;
-    long userId=0;
+    long userId;
     boolean success=false;
     CustomButton deletebutton,updatebutton;
     DBHandler dbHandle = new DBHandler(this);
@@ -60,15 +65,17 @@ public class TakeAQuiz extends ScrollingActivity {
         Intent inputIntent = getIntent();
         userInput = (Category)(inputIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
         gradeInput= (int) (inputIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0) - 2);
-
         int categoryIdInput = userInput.getSubCategory().get(0).getCategoryId();
+        setContentView(R.layout.activity_take_aquiz);
         //  offset = inputIntent.getIntExtra(ActivityConstants.QUIZAGAIN,0) * 20;
         questionList = dbHandle.getAllQuestions(categoryIdInput, gradeInput, offset);
-        setContentView(R.layout.activity_take_aquiz);
+
         Chronometer timeElapsed = (Chronometer) findViewById(R.id.timeElapsed);
         updateQuestion(Boolean.FALSE, null);
         updateScoreCard(userInput, gradeInput);
         timeElapsed.start();
+        SharedPref shared=new SharedPref();
+        userId=shared.getId(this);
         deletebutton=(CustomButton)findViewById(R.id.del_quest);
         updatebutton=(CustomButton)findViewById(R.id.up_quest);
     //If userid of the question and userid of the login are not same, then they cannot delete the question
@@ -359,4 +366,18 @@ public void updateQuest(View view){
     snackBar.show();
 
 }*/
+    @Override
+    public void onBackPressed()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit the quiz?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                       TakeAQuiz.super.onBackPressed();
+                    }
+                }).create().show();
+    }
 }

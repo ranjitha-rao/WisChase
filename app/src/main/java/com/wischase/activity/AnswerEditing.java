@@ -31,8 +31,8 @@ AnswerEditing()
             op4.setText(question.getOptionFour());
             RadioGroup radioGroup = (RadioGroup) findViewById(R.id.options);
             int index = (question.getCorrectAnswer())-1;
-            //  radioGroup.check(index-1);
-            ((CustomRadioButton)radioGroup.getChildAt(index-1)).setChecked(true);
+                    //  radioGroup.check(index-1);
+            ((CustomRadioButton)radioGroup.getChildAt(index)).setChecked(true);
 //return 1;
 
 

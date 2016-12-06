@@ -19,7 +19,7 @@ import com.wischase.db.DBHandler;
 import com.wischase.view.CustomTextView;
 import com.wischase.view.menu.ScrollingActivity;
 
-public class QuestionUpload extends UpdateTable {
+public class QuestionUpload extends QuestionEditing {
 int grade;
     Category userInput;
     int categoryIdInput;
@@ -49,11 +49,10 @@ int grade;
         });*/
         if(questionId!=0)
         {
-            EditText existing_question=(EditText)findViewById(R.id.question);
-            DBHandler dbHandler=new DBHandler(this);
-            question=dbHandler.getAQuestion(questionId);
-           String questionTxt= question.getQuestionText();
-            existing_question.setText(questionTxt);
+            question=super.updateQuestion(question,questionId);}
+        else {
+            EditText editText=(EditText)findViewById(R.id.question);
+            editText.setText(" ");
         }
 
     }
@@ -65,8 +64,10 @@ int grade;
         String question_upload=editText.getText().toString();
         if((question_upload!=null)||(question_upload!=" ")) {
             //setContentView(R.layout.activity_answer_upload);
-            Intent intent = new Intent(this, AnswerUpload.class);
+
+           Intent intent = new Intent(this, AnswerUpload.class);
             if (questionId != 0) {
+                question.setQuestionText(question_upload);
                 intent.putExtra(ActivityConstants.QUESTIONS, question);
                 intent.putExtras(getIntent().getExtras());
                 startActivity(intent);
@@ -74,15 +75,10 @@ int grade;
             else {
                 Question upload = new Question();
                 upload.setQuestionText(question_upload);
-                //After shared preference done need to add this user id
-                // upload.setUserid();
                 upload.setGrade(grade);
                 upload.setCategoryId(categoryIdInput);
-
                 intent.putExtra(ActivityConstants.QUESTIONS, upload);
                 intent.putExtras(getIntent().getExtras());
-                //  intent.putExtra(ActivityConstants.GRADE_INPUT,grade);
-                //intent.putExtra(ActivityConstants.USER_INPUT,userInput);
                 startActivity(intent);
             }
         }

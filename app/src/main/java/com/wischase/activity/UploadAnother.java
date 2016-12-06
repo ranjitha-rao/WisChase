@@ -27,7 +27,7 @@ Intent gtIntent=getIntent();
         userInput=(Category)(gtIntent.getParcelableExtra(ActivityConstants.USER_INPUT));
         grade=(int)(gtIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0)-2);
         TextView text;
-        Toast.makeText(this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
+       // Toast.makeText(this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
     }
 public void anotherQuestion(View view)
 {

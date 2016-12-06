@@ -18,6 +18,7 @@ import com.wischase.Category;
 import com.wischase.Question;
 import com.wischase.R;
 import com.wischase.db.DBHandler;
+import com.wischase.utils.SharedPref;
 import com.wischase.view.menu.ScrollingActivity;
 
 import java.util.List;
@@ -27,7 +28,9 @@ Question question;
     int grade;
     Category userInput;
     int questionId;
-AnswerEditing answer=new AnswerEditing();
+    SharedPref sharedPref=new SharedPref();
+    AnswerEditing answer=new AnswerEditing();
+    int categoryIdInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +45,7 @@ AnswerEditing answer=new AnswerEditing();
         grade=(int)(inputIntent.getLongExtra(ActivityConstants.GRADE_INPUT,0)-2);
         questionId=(int)inputIntent.getIntExtra(ActivityConstants.QUEST_NO,0);
         super.updateCategoryTable(userInput, grade);
-
+        categoryIdInput= userInput.getSubCategory().get(0).getCategoryId();
         if(questionId!=0)
         {
        super.updateQuestion(question, questionId);
@@ -51,6 +54,16 @@ AnswerEditing answer=new AnswerEditing();
          /* if((answer.updatingQuestion(question))==1)
             Toast.makeText(this,"Displayed",Toast.LENGTH_LONG ).show();
 */
+        }
+        else {
+            EditText op1 = (EditText) findViewById(R.id.up_option1);
+            EditText op2 = (EditText) findViewById(R.id.up_option2);
+            EditText op3 = (EditText) findViewById(R.id.up_option3);
+            EditText op4 = (EditText) findViewById(R.id.up_option4);
+            op1.setText(" ");
+            op2.setText(" ");
+            op3.setText(" ");
+            op4.setText(" ");
         }
 
        }
@@ -76,13 +89,16 @@ AnswerEditing answer=new AnswerEditing();
 
                 } else {
                     i = 0;
+                    long userid = sharedPref.getId(this);
                     question.setOptionOne(option1);
                     question.setOptionTwo(option2);
                     question.setOptionThree(option3);
                     question.setOptionFour(option4);
                     question.setCorrectAnswer(index + 1);
                     /* Need to set category id, userid,grade*/
-
+                    question.setCategoryId(categoryIdInput);
+                    question.setUserid(userid);
+                    question.setGrade(grade);
                 }
             }
         return i;

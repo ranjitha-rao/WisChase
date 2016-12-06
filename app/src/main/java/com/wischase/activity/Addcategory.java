@@ -66,15 +66,21 @@ Spinner categoryspinner;
             String categoryname =category.getText().toString();
             subcategory=(EditText)findViewById(R.id.editText2);
             String subcategoryname =subcategory.getText().toString();
+            //Categoryname has to be selected or given a new name. Subcategory cannot be empty either
             if((categoryname.equals(""))&&(!(subcategoryname.equals(""))))
                 categoryname=categoryspinner.getSelectedItem().toString();
-if(!(subcategoryname.equals(""))) {
-    DBHandler dbhandle = new DBHandler(this);
-    long newlyadded = dbhandle.insertUserAddedCatInfo(categoryname, subcategoryname);
-    Toast.makeText(getBaseContext(), subcategoryname + " added", Toast.LENGTH_SHORT).show();
-    //setContentView(R.layout.activity_addcategory);
-}
+            //Checking subcategory is not equal to null
+            if(!(subcategoryname.equals("")))
+            {
+                DBHandler dbhandle = new DBHandler(this);
+                long newlyadded = dbhandle.insertUserAddedCatInfo(categoryname, subcategoryname);
+                //Checking whether it is already exist or not.category and subcategory combination has to be unique
+                if(newlyadded==-1)
+                    Toast.makeText(getBaseContext(),"Already exists",Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getBaseContext(), subcategoryname + " added", Toast.LENGTH_SHORT).show();
+            }
             else
-    Toast.makeText(getBaseContext(),"Please add a subcategory",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),"Please add a subcategory",Toast.LENGTH_LONG).show();
         }
    }
